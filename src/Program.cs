@@ -1,6 +1,6 @@
 ﻿/*
  *LAST WORKED ON:
- *                  Simple Line --- Change Vertex stuff doenst really work :(
+ *                  Simple Line --- Change Vertex stuff doesnt really work :(
  */
 namespace music_player_app
 {
