@@ -28,6 +28,11 @@ namespace Core.UI
             return Drawable_Elem;
         }
 
+        public void DrawTo(RenderWindow window)
+        {
+            window.Draw(getDrawable());
+        }
+
         public void setOrigin(string align_x = "left", string align_y = "top")
         {
             float x = (align_x == "center") ? (Drawable_Elem.GetGlobalBounds().Width * (float)0.5) : (align_x == "right") ? Drawable_Elem.GetGlobalBounds().Width : 0;

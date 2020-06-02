@@ -1,6 +1,6 @@
 ﻿/*
  *LAST WORKED ON:
- *                  Simple Line --- Change Vertex stuff doesnt really work :(
+ *                  Core.UI.Controls.Button + Core.UI.Interfaces.IClickableControl
  */
 namespace music_player_app
 {

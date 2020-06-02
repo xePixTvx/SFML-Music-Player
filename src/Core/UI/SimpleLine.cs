@@ -22,5 +22,10 @@ namespace Core.UI
         {
             return Drawable_Elem;
         }
+
+        public void DrawTo(RenderWindow window)
+        {
+            window.Draw(getDrawable());
+        }
     }
 }
