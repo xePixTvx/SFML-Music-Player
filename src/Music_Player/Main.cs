@@ -15,23 +15,21 @@ namespace music_player_app.Music_Player
         private SoundPlayer.SoundPlayer Audio;
 
 
-        private Button test_button;
+        private TextButton test_button;
 
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
             FPS_TEXT = new SimpleText(default_font, Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
-            FPS_TEXT.setOrigin("left", "top");
-            FPS_TEXT.setPosition("left", "top", 0, 0);
+            FPS_TEXT.setPosition("left_top", "left_top");
 
             Main_Background = new SimpleSprite(Assets.Main_Background_Texture);
-            Main_Background.setOrigin("center", "center");
-            Main_Background.setPosition("center", "center");
+            Main_Background.setPosition("center_center", "center_center");
 
             Audio = new SoundPlayer.SoundPlayer();
             Audio.LoadSound(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));
 
 
-            test_button = new Button();
+            test_button = new TextButton("left_center", "left_center", 20, 0, TestButtonAction);
 
         }
 
@@ -73,8 +71,21 @@ namespace music_player_app.Music_Player
             }
         }
 
+        protected override void onMouseButtonReleased(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Button == Mouse.Button.Left)
+            {
+                if(test_button.IsSelected())
+                {
+                    test_button.ExecuteAction();
+                }
+            }
+        }
 
-
+        private void TestButtonAction()
+        {
+            Exit();
+        }
 
 
         /* TEST FFT using MathNet.Numerics(for Fourier Forward) + System.Numerics(for Complex data)

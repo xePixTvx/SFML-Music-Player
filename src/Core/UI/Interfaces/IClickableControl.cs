@@ -8,6 +8,7 @@ namespace Core.UI.Interfaces
     interface IClickableControl
     {
         void DrawTo(RenderWindow window);
-        bool isHovered(RenderWindow window);
+        bool IsSelected();
+        void ExecuteAction();
     }
 }

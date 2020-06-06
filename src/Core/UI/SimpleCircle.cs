@@ -16,7 +16,6 @@ namespace Core.UI
                 FillColor = color
             };
             Drawable_Elem = circle;
-            setOrigin();
             setPosition();
         }
 
@@ -30,19 +29,18 @@ namespace Core.UI
             window.Draw(getDrawable());
         }
 
-        public void setOrigin(string align_x = "left", string align_y = "top")
+        public void setPosition(string origin_align = "left_top", string position_align = "left_top", float x_pos = 0, float y_pos = 0)
         {
-            float x = (align_x == "center") ? Drawable_Elem.Radius : (align_x == "right") ? (Drawable_Elem.Radius * 2) : 0;
-            float y = (align_y == "center") ? Drawable_Elem.Radius : (align_y == "bottom") ? (Drawable_Elem.Radius * 2) : 0;
-            Drawable_Elem.Origin = new Vector2f(x, y);
-        }
+            //Origin
+            float origin_x = (origin_align.Split('_')[0] == "center") ? Drawable_Elem.Radius : (origin_align.Split('_')[0] == "right") ? (Drawable_Elem.Radius * 2) : 0;
+            float origin_y = (origin_align.Split('_')[1] == "center") ? Drawable_Elem.Radius : (origin_align.Split('_')[1] == "bottom") ? (Drawable_Elem.Radius * 2) : 0;
+            Drawable_Elem.Origin = new Vector2f(origin_x, origin_y);
 
-        public void setPosition(string align_x = "left", string align_y = "top", float x_pos = 0, float y_pos = 0)
-        {
+            //Position
             uint screen_width = App.setting_window_width;
             uint screen_height = App.setting_window_height;
-            float x = (align_x == "center") ? ((screen_width / 2) + x_pos) : (align_x == "right") ? (screen_width + x_pos) : x_pos;
-            float y = (align_y == "center") ? ((screen_height / 2) + y_pos) : (align_y == "bottom") ? (screen_height + y_pos) : y_pos;
+            float x = (position_align.Split('_')[0] == "center") ? ((screen_width / 2) + x_pos) : (position_align.Split('_')[0] == "right") ? (screen_width + x_pos) : x_pos;
+            float y = (position_align.Split('_')[1] == "center") ? ((screen_height / 2) + y_pos) : (position_align.Split('_')[1] == "bottom") ? (screen_height + y_pos) : y_pos;
             Drawable_Elem.Position = new Vector2f(x, y);
         }
     }

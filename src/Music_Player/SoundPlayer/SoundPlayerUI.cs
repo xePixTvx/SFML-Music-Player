@@ -15,21 +15,17 @@ namespace music_player_app.Music_Player.SoundPlayer
         public SoundPlayerUI()
         {
             PlayPauseButton_Sprite = new SimpleSprite(Assets.Button_Play_Texture);
-            PlayPauseButton_Sprite.setOrigin("center", "bottom");
-            PlayPauseButton_Sprite.setPosition("center", "bottom", 20, -20);
+            PlayPauseButton_Sprite.setPosition("center_bottom", "center_bottom", 20, -20);
 
             NextButton_Sprite = new SimpleSprite(Assets.Button_Next_Texture);
-            NextButton_Sprite.setOrigin("center", "bottom");
-            NextButton_Sprite.setPosition("center", "bottom", 80, -20);
+            NextButton_Sprite.setPosition("center_bottom", "center_bottom", 80, -20);
 
 
             RestartButton_Sprite = new SimpleSprite(Assets.Button_Reload_Texture);
-            RestartButton_Sprite.setOrigin("center", "bottom");
-            RestartButton_Sprite.setPosition("center", "bottom", -20, -20);
+            RestartButton_Sprite.setPosition("center_bottom", "center_bottom", -20, -20);
 
             PreviousButton_Sprite = new SimpleSprite(Assets.Button_Previous_Texture);
-            PreviousButton_Sprite.setOrigin("center", "bottom");
-            PreviousButton_Sprite.setPosition("center", "bottom", -80, -20);
+            PreviousButton_Sprite.setPosition("center_bottom", "center_bottom", -80, -20);
         }
 
 
