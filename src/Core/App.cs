@@ -24,6 +24,9 @@ namespace Core
         //Logger
         public static Logger Log;
 
+        //Asset Manager
+        public static AssetManager AsManager;
+
         //Window
         public RenderWindow window;
         public static VideoMode window_size { get; private set; }
@@ -39,6 +42,7 @@ namespace Core
         protected abstract void Update();
 
         //Default Assets
+        private bool DefaultAssetLoadFailed = false;
         public static Font default_font { get; private set; }
         public static Texture default_texture { get; private set; }
 
@@ -47,8 +51,8 @@ namespace Core
             //Config/Setting Stuff
             Config = new ConfigFile(_ConfigFileName);
             setting_ShowLogInConsole = (Config.getConfigSetting("MAIN", "ShowLogInConsole", "false") == "true") ? true : false;
-            setting_window_width = Convert.ToUInt32(Config.getConfigSetting("MAIN", "window_width", "800"));
-            setting_window_height = Convert.ToUInt32(Config.getConfigSetting("MAIN", "window_height", "600"));
+            setting_window_width = Convert.ToUInt32(Config.getConfigSetting("MAIN", "window_width", "800"));//lock it???
+            setting_window_height = Convert.ToUInt32(Config.getConfigSetting("MAIN", "window_height", "600"));//lock it???
             setting_showFps = (Config.getConfigSetting("MAIN", "showFps", "false") == "true") ? true : false;
             setting_window_style = Styles.Close;
             setting_backupLogFiles = (Config.getConfigSetting("MAIN", "backupLogFiles", "true") == "true") ? true : false;
@@ -57,7 +61,12 @@ namespace Core
             window_background_color = new Color(0, 0, 0);
             window_size = new VideoMode(setting_window_width, setting_window_height);
             InitWindow(window_title, setting_window_style);
-            LoadDefaultAssets();
+            AsManager = new AssetManager();
+            if (!LoadDefaultAssets())
+            {
+                Log.Print("DefaultAssetLoadFailed == true", LoggerType.ERROR);
+                DefaultAssetLoadFailed = true;
+            }
         }
 
         public void Start()
@@ -129,6 +138,10 @@ namespace Core
                 Update();
                 window.Display();
                 frameTime = frameTimeClock.Restart().AsMilliseconds();
+                if(DefaultAssetLoadFailed)
+                {
+                    Exit();
+                }
             }
         }
         #endregion
@@ -148,7 +161,7 @@ namespace Core
 
 
         #region Default Assets
-        private void LoadDefaultAssets()
+        private bool LoadDefaultAssets()
         {
             //Default Font
             try
@@ -159,6 +172,7 @@ namespace Core
             catch (Exception e)
             {
                 Log.Print(e.Message, LoggerType.ERROR);
+                return false;
             }
 
             //Default Texture
@@ -171,7 +185,9 @@ namespace Core
             catch (Exception e)
             {
                 Log.Print(e.Message, LoggerType.ERROR);
+                return false;
             }
+            return true;
         }
         #endregion
 

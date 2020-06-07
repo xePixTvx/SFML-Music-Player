@@ -19,10 +19,20 @@ namespace music_player_app.Music_Player
 
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
-            FPS_TEXT = new SimpleText(default_font, Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
+            //Load Assets
+            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "MAIN_BACKGROUND.jpg"), "main_bg");
+            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_play.png"), "button_play");
+            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_pause.png"), "button_pause");
+            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_reload.png"), "button_reload");
+            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_next.png"), "button_next");
+            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_previous.png"), "button_previous");
+
+
+
+            FPS_TEXT = new SimpleText("default", Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
             FPS_TEXT.setPosition("left_top", "left_top");
 
-            Main_Background = new SimpleSprite(Assets.Main_Background_Texture);
+            Main_Background = new SimpleSprite("main_bg");
             Main_Background.setPosition("center_center", "center_center");
 
             Audio = new SoundPlayer.SoundPlayer();

@@ -8,11 +8,11 @@ namespace Core.UI
     {
         private Text Drawable_Elem;
 
-        public SimpleText(Font font, Text.Styles style, uint size, Color color, string displayedText)
+        public SimpleText(string font_name, Text.Styles style, uint size, Color color, string displayedText)
         {
             Text text = new Text
             {
-                Font = font,
+                Font = Core.App.AsManager.getFont(font_name),
                 Style = style,
                 CharacterSize = size,
                 FillColor = color,

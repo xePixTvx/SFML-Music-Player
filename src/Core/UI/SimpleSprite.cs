@@ -8,11 +8,11 @@ namespace Core.UI
     {
         private Sprite Drawable_Elem;
 
-        public SimpleSprite(Texture texture)
+        public SimpleSprite(string texture_name)
         {
             Sprite sprite = new Sprite
             {
-                Texture = texture
+                Texture = Core.App.AsManager.getTexture(texture_name)
             };
             Drawable_Elem = sprite;
             setPosition();
