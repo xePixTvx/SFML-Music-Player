@@ -14,12 +14,12 @@ namespace Core.AssetTypes
             try
             {
                 texture = new Texture(path);
-                Core.App.Log.Print("Texture: " + path + " Loaded as: " + name);
+                Core.App.Log.Print("Texture: " + path + " Loaded as: " + name, LoggerType.ASSET);
             }
             catch (Exception e)
             {
-                Core.App.Log.Print("Failed to load Texture: " + path, LoggerType.ERROR);
-                Core.App.Log.Print(e.ToString(), LoggerType.ERROR);
+                Core.App.Log.Print("Failed to load Texture: " + path, LoggerType.ASSET);
+                Core.App.Log.Print(e.ToString(), LoggerType.ASSET);
                 texture = Core.App.default_texture;
             }
         }

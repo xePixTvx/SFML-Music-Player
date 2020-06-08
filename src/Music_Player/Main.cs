@@ -18,8 +18,6 @@ namespace music_player_app.Music_Player
         private TextButton test_button;
         private SpriteButton spriteButton;
 
-        private SimpleCircle testCirc;
-
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
             //Load Assets
@@ -42,11 +40,8 @@ namespace music_player_app.Music_Player
             Audio.LoadSound(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));
 
 
-            test_button = new TextButton("left_center", "left_center", 20, 0, TestButtonAction);
+            test_button = new TextButton("left_center", "left_center", 20, 0);
             spriteButton = new SpriteButton("default", "center_center", "center_center");
-
-            testCirc = new SimpleCircle(20, new Color(255, 0, 0, 255));
-            testCirc.setPosition("right_center", "right_center");
 
         }
 
@@ -59,14 +54,12 @@ namespace music_player_app.Music_Player
                 FPS_TEXT.Render();
             }
 
-            //window.Draw(Main_Background.getDrawable());
+            //Main_Background.Render();
 
             Audio.Update(window);
 
             test_button.Render();
             spriteButton.Render();
-
-            testCirc.Render();
         }
 
 

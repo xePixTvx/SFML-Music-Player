@@ -1,6 +1,7 @@
 ﻿/*
  *LAST WORKED ON:
- *                  UPDATED UI Interfaces
+ *                  Added AssetManager Log
+ *                  Adding Button Styles
  */
 namespace music_player_app
 {

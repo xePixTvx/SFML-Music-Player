@@ -14,12 +14,12 @@ namespace Core.AssetTypes
             try
             {
                 font = new Font(path);
-                Core.App.Log.Print("Font: " + path + " Loaded as: " + name);
+                Core.App.Log.Print("Font: " + path + " Loaded as: " + name, LoggerType.ASSET);
             }
             catch (Exception e)
             {
-                Core.App.Log.Print("Failed to load Font: " + path, LoggerType.ERROR);
-                Core.App.Log.Print(e.ToString(), LoggerType.ERROR);
+                Core.App.Log.Print("Failed to load Font: " + path, LoggerType.ASSET);
+                Core.App.Log.Print(e.ToString(), LoggerType.ASSET);
                 font = Core.App.default_font;
             }
         }

@@ -35,7 +35,7 @@ namespace Core
             }
             else
             {
-                Core.App.Log.Print("Tried to load a not supported AssetType!! --- Core.AssetManager.cs", LoggerType.ERROR);
+                Core.App.Log.Print("Tried to load a not supported AssetType!! --- Core.AssetManager.cs", LoggerType.ASSET);
             }
         }
 

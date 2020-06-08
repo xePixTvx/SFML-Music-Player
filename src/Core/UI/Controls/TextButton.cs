@@ -8,7 +8,6 @@ namespace Core.UI.Controls
     class TextButton : IDrawable<TextButton>, IClickableControl
     {
         private SimpleRect BG;
-        private SimpleText BText;
         private bool isSelected;
         private Action action;
         public bool isActive { get; set; }
