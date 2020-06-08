@@ -5,20 +5,19 @@ using System;
 
 namespace Core.UI.Controls
 {
-    class TextButton : IDrawable<TextButton>
+    class SpriteButton : IDrawable<SpriteButton>, IClickableControl
     {
-        private SimpleRect BG;
-        private SimpleText BText;
+        private SimpleSprite sprite;
         private bool isSelected;
         private Action action;
         public bool isActive { get; set; }
         public bool isVisible { get; set; }
 
 
-        public TextButton(string BG_Origin_Align = "center_center", string BG_Position_Align = "center_center", float BG_Position_X = 0, float BG_Position_Y = 0, Action button_action = null)
+        public SpriteButton(string texture_name = "default", string sp_Origin_Align = "center_center", string sp_Position_Align = "center_center", float BG_Position_X = 0, float BG_Position_Y = 0, Action button_action = null)
         {
-            BG = new SimpleRect(200, 30, new Color(255, 0, 0, 255));
-            BG.setPosition(BG_Origin_Align, BG_Position_Align, BG_Position_X, BG_Position_Y);
+            sprite = new SimpleSprite(texture_name);
+            sprite.setPosition(sp_Origin_Align, sp_Position_Align, BG_Position_X, BG_Position_Y);
             action = button_action;
 
             isActive = true;
@@ -31,25 +30,25 @@ namespace Core.UI.Controls
             {
                 if (isHovered(Core.App.window))
                 {
-                    BG.Drawable_Rect.FillColor = new Color(0, 255, 0, 255);
+                    sprite.Drawable_Sprite.Color = new Color(255, 255, 255, 255);
                     isSelected = true;
                 }
                 else
                 {
-                    BG.Drawable_Rect.FillColor = new Color(255, 0, 0, 255);
+                    sprite.Drawable_Sprite.Color = new Color(255, 255, 255, 130);
                     isSelected = false;
                 }
 
-                if(isVisible)
+                if (isVisible)
                 {
-                    BG.Render();
+                    sprite.Render();
                 }
             }
         }
 
         public void ExecuteAction()
         {
-            if(action==null)
+            if (action == null)
             {
                 Core.App.Log.Print("Button Action Not Defined!", LoggerType.ERROR);
                 return;
@@ -64,12 +63,11 @@ namespace Core.UI.Controls
 
         private bool isHovered(RenderWindow window)
         {
-            if (BG.Drawable_Rect.GetGlobalBounds().Contains(Mouse.GetPosition(window).X, Mouse.GetPosition(window).Y) && window.HasFocus())
+            if (sprite.Drawable_Sprite.GetGlobalBounds().Contains(Mouse.GetPosition(window).X, Mouse.GetPosition(window).Y) && window.HasFocus())
             {
                 return true;
             }
             return false;
         }
-
     }
 }

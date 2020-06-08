@@ -4,7 +4,8 @@ namespace Core.UI.Interfaces
 {
     interface IDrawable<Type>
     {
-        Type getDrawable();
-        void DrawTo(RenderWindow window);
+        bool isActive { get; set; }
+        bool isVisible { get; set; }
+        void Render();
     }
 }

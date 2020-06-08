@@ -1,6 +1,6 @@
 ﻿namespace Core.UI.Interfaces
 {
-    interface IDrawableText<Text> : IDrawable<Text>, IDrawableUI<Text>
+    interface IDrawableText<Text>
     {
         void setText(string text="UNKNOWN STRING");
     }

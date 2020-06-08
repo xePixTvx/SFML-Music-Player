@@ -6,7 +6,9 @@ namespace Core.UI
 {
     class SimpleLine : IDrawable<VertexArray>
     {
-        private VertexArray Drawable_Elem;
+        public VertexArray Drawable_Line { get; private set; }
+        public bool isActive { get; set; }
+        public bool isVisible { get; set; }
 
         //UNFINISHED!!!!!!!!!!!!!!!!!!
         public SimpleLine(Vector2f start, Vector2f end, Color start_RGBA, Color end_RGBA)
@@ -15,17 +17,20 @@ namespace Core.UI
             line[0] = new Vertex(start, start_RGBA);
             line[1] = new Vertex(end, end_RGBA);
 
-            Drawable_Elem = line;
+            Drawable_Line = line;
+            isActive = true;
+            isVisible = true;
         }
 
-        public VertexArray getDrawable()
+        public void Render()
         {
-            return Drawable_Elem;
-        }
-
-        public void DrawTo(RenderWindow window)
-        {
-            window.Draw(getDrawable());
+            if (isActive)
+            {
+                if (isVisible)
+                {
+                    Core.App.window.Draw(Drawable_Line);
+                }
+            }
         }
     }
 }

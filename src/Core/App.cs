@@ -28,7 +28,7 @@ namespace Core
         public static AssetManager AsManager;
 
         //Window
-        public RenderWindow window;
+        public static RenderWindow window { get; private set; }
         public static VideoMode window_size { get; private set; }
         public bool isActive { get; private set; } = false;
         private Color window_background_color;
