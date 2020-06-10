@@ -1,5 +1,7 @@
-﻿using SFML.Audio;
+﻿using Core.UI.Controls;
+using SFML.Audio;
 using SFML.Graphics;
+using SFML.Window;
 
 namespace music_player_app.Music_Player.SoundPlayer
 {
@@ -55,6 +57,20 @@ namespace music_player_app.Music_Player.SoundPlayer
         public void Update(RenderWindow window)
         {
             UI.Update(window);
+        }
+
+        public void MouseButtonReleased(MouseButtonEventArgs e)
+        {
+            if(e.Button == Mouse.Button.Left)
+            {
+                foreach(SpriteButton button in UI.ButtonList)
+                {
+                    if(button.IsSelected())
+                    {
+                        button.ExecuteAction();
+                    }
+                }
+            }
         }
 
 
