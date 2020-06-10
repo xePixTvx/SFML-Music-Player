@@ -12,9 +12,4 @@
     <PackageReference Include="SFML.Net" Version="2.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\UI\Controls\SpriteButtonStyles\" />
-    <Folder Include="Core\UI\Controls\TextButtonStyles\" />
-  </ItemGroup>
-
 </Project>

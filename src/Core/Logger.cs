@@ -59,6 +59,7 @@ namespace Core
             {
                 if (UseConsole)
                 {
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Music_Player: " + text);
                 }
                 Writer_Main.WriteLine("[" + dateTime + "]Music_Player: " + text);
@@ -68,6 +69,7 @@ namespace Core
             {
                 if (UseConsole)
                 {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Music_Player ASSET: " + text);
                 }
                 Writer_Asset.WriteLine("[" + dateTime + "]Music_Player ASSET: " + text);
@@ -77,10 +79,15 @@ namespace Core
             {
                 if (UseConsole)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Music_Player ERROR: " + text);
                 }
                 Writer_Error.WriteLine("[" + dateTime + "]Music_Player ERROR: " + text);
                 Writer_Error.Flush();
+            }
+            if (UseConsole)
+            {
+                Console.ResetColor();
             }
         }
 

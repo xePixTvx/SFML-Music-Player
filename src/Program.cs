@@ -1,7 +1,6 @@
 ﻿/*
- *LAST WORKED ON:
- *                  Added AssetManager Log
- *                  Adding Button Styles
+ *CURRENTLY WORKING ON:
+ *                          Core.UI.Controls.TextButton.cs ---- Text Align Stuff
  */
 namespace music_player_app
 {

@@ -40,9 +40,8 @@ namespace music_player_app.Music_Player
             Audio.LoadSound(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));
 
 
-            test_button = new TextButton("left_center", "left_center", 20, 0);
-            spriteButton = new SpriteButton("default", "center_center", "center_center");
-
+            test_button = new TextButton("left_center", "left_center", 20, 0, null, "default", 14, Text.Styles.Regular, "center_center", "Test Shit");
+            spriteButton = new SpriteButton("default", "center_center", "center_center", 0, 0, TestButtonAction);
         }
 
 
@@ -91,6 +90,10 @@ namespace music_player_app.Music_Player
                 if(test_button.IsSelected())
                 {
                     test_button.ExecuteAction();
+                }
+                if(spriteButton.IsSelected())
+                {
+                    spriteButton.ExecuteAction();
                 }
             }
         }
