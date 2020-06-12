@@ -3,19 +3,17 @@ using System.IO;
 using SFML.Graphics;
 using SFML.Window;
 using Core;
-using Core.UI;
-using Core.UI.Controls;
 
 namespace music_player_app.Music_Player
 {
     class Main : App
     {
-        private SimpleText FPS_TEXT;
-        private SimpleSprite Main_Background;
+        //private SimpleText FPS_TEXT;
+        //private SimpleSprite Main_Background;
         private SoundPlayer.SoundPlayer Audio;
 
 
-        private TextButton test_button;
+        //private TextButton test_button;
 
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
@@ -29,23 +27,23 @@ namespace music_player_app.Music_Player
 
 
 
-            FPS_TEXT = new SimpleText("default", Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
-            FPS_TEXT.setPosition("left_top", "left_top");
+            //FPS_TEXT = new SimpleText("default", Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
+            //FPS_TEXT.setPosition("left_top", "left_top");
 
-            Main_Background = new SimpleSprite("main_bg");
+            /*Main_Background = new SimpleSprite("main_bg");
             Main_Background.setPosition("center_center", "center_center");
 
             Audio = new SoundPlayer.SoundPlayer();
-            Audio.LoadSound(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));
+            Audio.LoadSound(Path.Combine(Environment.CurrentDirectory, "data", "Zedd - Clarity (Light Shard Remix).ogg"));
 
 
-            test_button = new TextButton("left_center", "left_center", 20, 0, null, "default", 14, Text.Styles.Regular, "center_center", "Test Shit");
+            test_button = new TextButton("left_center", "left_center", 50, 0, null, "default", 14, Text.Styles.Regular, "center", "Test Shit");*/
         }
 
 
         protected override void Update()
         {
-            if(setting_showFps)
+            /*if(setting_showFps)
             {
                 FPS_TEXT.setText("FPS: " + getFPS() + " ------ " + getFrameTime() + " MS");
                 FPS_TEXT.Render();
@@ -55,7 +53,7 @@ namespace music_player_app.Music_Player
 
             Audio.Update(window);
 
-            test_button.Render();
+            test_button.Render();*/
         }
 
 
@@ -82,13 +80,14 @@ namespace music_player_app.Music_Player
 
         protected override void onMouseButtonReleased(object sender, MouseButtonEventArgs e)
         {
-            Audio.MouseButtonReleased(e);
+            //Audio.MouseButtonReleased(e);
             if (e.Button == Mouse.Button.Left)
             {
-                if(test_button.IsSelected())
+               /* if(test_button.IsSelected())
                 {
                     test_button.ExecuteAction();
                 }
+               */
             }
         }
 

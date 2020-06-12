@@ -1,5 +1,4 @@
-﻿using Core.UI.Controls;
-using SFML.Audio;
+﻿using SFML.Audio;
 using SFML.Graphics;
 using SFML.Window;
 
@@ -63,13 +62,14 @@ namespace music_player_app.Music_Player.SoundPlayer
         {
             if(e.Button == Mouse.Button.Left)
             {
-                foreach(SpriteButton button in UI.ButtonList)
+                /*foreach(SpriteButton button in UI.ButtonList)
                 {
                     if(button.IsSelected())
                     {
                         button.ExecuteAction();
                     }
                 }
+                */
             }
         }
 
