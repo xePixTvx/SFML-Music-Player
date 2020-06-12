@@ -1,19 +1,15 @@
 ﻿using System;
 using System.IO;
-using SFML.Graphics;
 using SFML.Window;
+using SFML.Graphics;
 using Core;
+using Core.UI.Primitives;
 
 namespace music_player_app.Music_Player
 {
     class Main : App
     {
-        //private SimpleText FPS_TEXT;
-        //private SimpleSprite Main_Background;
-        private SoundPlayer.SoundPlayer Audio;
-
-
-        //private TextButton test_button;
+        private Rect TestRect;
 
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
@@ -30,14 +26,11 @@ namespace music_player_app.Music_Player
             //FPS_TEXT = new SimpleText("default", Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
             //FPS_TEXT.setPosition("left_top", "left_top");
 
-            /*Main_Background = new SimpleSprite("main_bg");
-            Main_Background.setPosition("center_center", "center_center");
-
-            Audio = new SoundPlayer.SoundPlayer();
-            Audio.LoadSound(Path.Combine(Environment.CurrentDirectory, "data", "Zedd - Clarity (Light Shard Remix).ogg"));
 
 
-            test_button = new TextButton("left_center", "left_center", 50, 0, null, "default", 14, Text.Styles.Regular, "center", "Test Shit");*/
+            TestRect = new Rect(200, 40, new Color(255, 0, 0, 255));
+
+
         }
 
 
@@ -47,13 +40,9 @@ namespace music_player_app.Music_Player
             {
                 FPS_TEXT.setText("FPS: " + getFPS() + " ------ " + getFrameTime() + " MS");
                 FPS_TEXT.Render();
-            }
+            }*/
 
-            //Main_Background.Render();
-
-            Audio.Update(window);
-
-            test_button.Render();*/
+            TestRect.Render();
         }
 
 
@@ -66,29 +55,13 @@ namespace music_player_app.Music_Player
             }
             if (e.Code == Keyboard.Key.A)
             {
-                Audio.SetStatus(SoundPlayer.SoundPlayer.PlayingStatusType.PLAY);
-            }
-            if (e.Code == Keyboard.Key.S)
-            {
-                Audio.SetStatus(SoundPlayer.SoundPlayer.PlayingStatusType.PAUSE);
-            }
-            if (e.Code == Keyboard.Key.D)
-            {
-                Audio.SetStatus(SoundPlayer.SoundPlayer.PlayingStatusType.STOP);
+                //Log.Print("TEST: " + TestRect.IsActive.ToString());
+                //Audio.SetStatus(SoundPlayer.SoundPlayer.PlayingStatusType.PLAY);
             }
         }
 
         protected override void onMouseButtonReleased(object sender, MouseButtonEventArgs e)
         {
-            //Audio.MouseButtonReleased(e);
-            if (e.Button == Mouse.Button.Left)
-            {
-               /* if(test_button.IsSelected())
-                {
-                    test_button.ExecuteAction();
-                }
-               */
-            }
         }
 
         private void TestButtonAction()
