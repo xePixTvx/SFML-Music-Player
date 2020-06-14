@@ -1,16 +1,36 @@
 ﻿using Core.UI.Interfaces;
 using System.Collections.Generic;
 
-namespace music_player_app.Core
+namespace Core
 {
-    class RenderSystem
+    public class RenderSystem
     {
-        private List<IRenderable> RenderList = new List<IRenderable>();//RenderableBase??????
-
+        private List<IRenderable> RenderList = new List<IRenderable>();
 
         public RenderSystem()
         {
             RenderList.Clear();
+        }
+
+        public void AddToRenderList(IRenderable elem)
+        {
+            RenderList.Add(elem);
+        }
+
+        public void RemoveFromRenderList(IRenderable elem)
+        {
+            RenderList.Remove(elem);
+        }
+
+        public void Render()
+        {
+            foreach(IRenderable elem in RenderList)
+            {
+                if(elem.IsActive)
+                {
+                    elem.Render();
+                }
+            }
         }
     }
 }

@@ -3,16 +3,16 @@ using SFML.System;
 
 namespace Core.UI.Primitives
 {
-    class Rect : RenderableBase
+    class Circle : RenderableBase
     {
-        private RectangleShape shape;
+        private CircleShape shape;
 
-        public Rect(float width, float height, Color RGBA)
+        public Circle(float radius, Color RGBA)
         {
-            RectangleShape construct_shape = new RectangleShape
+            CircleShape construct_shape = new CircleShape
             {
-                Size = new Vector2f(width, height),
-                FillColor = RGBA,
+                Radius = radius,
+                FillColor = RGBA
             };
             shape = construct_shape;
             Core.App.RenderSys.AddToRenderList(this);
@@ -31,8 +31,8 @@ namespace Core.UI.Primitives
         {
             Origin_H_Align = h_align;
             Origin_V_Align = v_align;
-            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (shape.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? shape.Size.X : 0;
-            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (shape.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? shape.Size.Y : 0;
+            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? shape.Radius : (h_align == Origin_Horizontal_Alignment.RIGHT) ? (shape.Radius * 2) : 0;
+            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? shape.Radius : (v_align == Origin_Vertical_Alignment.BOTTOM) ? (shape.Radius * 2) : 0;
             shape.Origin = new Vector2f(origin_h, origin_v);
         }
 

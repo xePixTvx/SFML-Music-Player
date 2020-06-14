@@ -1,6 +1,5 @@
 ﻿/*
  *CURRENTLY WORKING ON:
- *                          Recode UI Stuff
  */
 namespace music_player_app
 {

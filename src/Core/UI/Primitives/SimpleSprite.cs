@@ -3,16 +3,15 @@ using SFML.System;
 
 namespace Core.UI.Primitives
 {
-    class Rect : RenderableBase
+    class SimpleSprite : RenderableBase
     {
-        private RectangleShape shape;
+        private Sprite shape;
 
-        public Rect(float width, float height, Color RGBA)
+        public SimpleSprite(string texture_name)
         {
-            RectangleShape construct_shape = new RectangleShape
+            Sprite construct_shape = new Sprite
             {
-                Size = new Vector2f(width, height),
-                FillColor = RGBA,
+                Texture = Core.App.AsManager.getTexture(texture_name)
             };
             shape = construct_shape;
             Core.App.RenderSys.AddToRenderList(this);
@@ -31,8 +30,8 @@ namespace Core.UI.Primitives
         {
             Origin_H_Align = h_align;
             Origin_V_Align = v_align;
-            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (shape.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? shape.Size.X : 0;
-            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (shape.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? shape.Size.Y : 0;
+            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (shape.Texture.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? shape.Texture.Size.X : 0;
+            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (shape.Texture.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? shape.Texture.Size.Y : 0;
             shape.Origin = new Vector2f(origin_h, origin_v);
         }
 

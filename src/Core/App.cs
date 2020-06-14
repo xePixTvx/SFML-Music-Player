@@ -27,6 +27,9 @@ namespace Core
         //Asset Manager
         public static AssetManager AsManager;
 
+        //Render System
+        public static RenderSystem RenderSys;
+
         //Window
         public static RenderWindow window { get; private set; }
         public static VideoMode window_size { get; private set; }
@@ -67,6 +70,7 @@ namespace Core
                 Log.Print("DefaultAssetLoadFailed == true", LoggerType.ERROR);
                 DefaultAssetLoadFailed = true;
             }
+            RenderSys = new RenderSystem();
         }
 
         public void Start()
@@ -136,6 +140,7 @@ namespace Core
                 window.DispatchEvents();
                 window.Clear(window_background_color);
                 Update();
+                RenderSys.Render();
                 window.Display();
                 frameTime = frameTimeClock.Restart().AsMilliseconds();
                 if(DefaultAssetLoadFailed)

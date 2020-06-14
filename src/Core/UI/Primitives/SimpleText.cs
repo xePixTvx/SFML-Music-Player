@@ -3,19 +3,29 @@ using SFML.System;
 
 namespace Core.UI.Primitives
 {
-    class Rect : RenderableBase
+    class SimpleText : RenderableBase
     {
-        private RectangleShape shape;
+        private Text shape;
 
-        public Rect(float width, float height, Color RGBA)
+        public SimpleText(string font_name, Text.Styles style, uint size, Color RGBA, string displayedText)
         {
-            RectangleShape construct_shape = new RectangleShape
+            Text construct_shape = new Text
             {
-                Size = new Vector2f(width, height),
+                Font = Core.App.AsManager.getFont(font_name),
+                Style = style,
+                CharacterSize = size,
                 FillColor = RGBA,
             };
             shape = construct_shape;
+            SetText(displayedText);
             Core.App.RenderSys.AddToRenderList(this);
+        }
+
+        public void SetText(string text = "UNKNOWN STRING")
+        {
+            shape.DisplayedString = text;
+            SetOrigin(Origin_H_Align, Origin_V_Align);
+            SetPosition(Position.X, Position.Y);
         }
 
         public override bool IsActive { get => base.IsActive; set => base.IsActive = value; }
@@ -31,8 +41,8 @@ namespace Core.UI.Primitives
         {
             Origin_H_Align = h_align;
             Origin_V_Align = v_align;
-            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (shape.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? shape.Size.X : 0;
-            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (shape.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? shape.Size.Y : 0;
+            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (shape.GetGlobalBounds().Width * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? shape.GetGlobalBounds().Width : 0;
+            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (shape.GetGlobalBounds().Height * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? shape.GetGlobalBounds().Height : 0;
             shape.Origin = new Vector2f(origin_h, origin_v);
         }
 
