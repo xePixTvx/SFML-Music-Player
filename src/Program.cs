@@ -1,5 +1,7 @@
 ﻿/*
  *CURRENTLY WORKING ON:
+ *                      Core.UI.Controls
+ *                      Core.UI overall SetSize stuff
  */
 namespace music_player_app
 {

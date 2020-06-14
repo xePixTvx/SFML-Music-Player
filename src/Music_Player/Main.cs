@@ -6,6 +6,7 @@ using Core;
 using Core.UI;
 using Core.UI.Primitives;
 using SFML.System;
+using Core.UI.Controls;
 
 namespace music_player_app.Music_Player
 {
@@ -18,6 +19,7 @@ namespace music_player_app.Music_Player
         private Triangle TestTriangle;
         private SimpleSprite TestSprite;
         private Line TestLine;
+        private SpriteButton TestSpriteButton;
 
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
@@ -58,6 +60,10 @@ namespace music_player_app.Music_Player
             TestSprite.SetPosition(sprite_pos.X, sprite_pos.Y);
 
             TestLine = new Line(new Vector2f(40, 40), new Vector2f(230, 150), Color.Cyan, Color.Red);
+
+            TestSpriteButton = new SpriteButton("main_bg");
+            TestSpriteButton.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
+            TestSpriteButton.SetPosition(Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).X, Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).Y);
 
         }
 

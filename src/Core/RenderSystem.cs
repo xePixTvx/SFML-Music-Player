@@ -28,6 +28,10 @@ namespace Core
             {
                 if(elem.IsActive)
                 {
+                    if(elem is IClickable clickElem)
+                    {
+                        clickElem.UpdateSelection();
+                    }
                     elem.Render();
                 }
             }
