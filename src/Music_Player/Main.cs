@@ -6,21 +6,12 @@ using Core;
 using Core.UI;
 using Core.UI.Primitives;
 using SFML.System;
-using Core.UI.Controls;
 
 namespace music_player_app.Music_Player
 {
     class Main : App
     {
         private SimpleText FPS_TEXT;
-
-        private Rect TestRect;
-        private Circle TestCircle;
-        private Triangle TestTriangle;
-        private SimpleSprite TestSprite;
-        private Line TestLine;
-        private SpriteButton TestSpriteButton;
-        private SpriteButton TestSpriteButton2;
 
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
@@ -37,39 +28,7 @@ namespace music_player_app.Music_Player
             FPS_TEXT.SetOrigin(Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment.TOP);
             Vector2f fps_main_pos = Utils.GetPosition(Position_Horizontal_Alignment.LEFT, Position_Vertical_Alignment.TOP);
             FPS_TEXT.SetPosition(fps_main_pos.X, fps_main_pos.Y);
-
-
-            //Testing Primitives
-            TestRect = new Rect(200, 40, new Color(255, 0, 0, 255));
-            TestRect.SetOrigin(Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment.CENTER);
-            Vector2f pos = Utils.GetPosition(Position_Horizontal_Alignment.LEFT, Position_Vertical_Alignment.CENTER);
-            TestRect.SetPosition(pos.X, pos.Y);
-
-            TestCircle = new Circle(20, new Color(255, 0, 0, 255));
-            TestCircle.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.TOP);
-            Vector2f circle_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.TOP);
-            TestCircle.SetPosition(circle_pos.X, circle_pos.Y);
-
-            TestTriangle = new Triangle(20, 0, new Color(255, 0, 0, 255));
-            TestTriangle.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.TOP);
-            Vector2f tri_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.TOP);
-            TestTriangle.SetPosition(tri_pos.X + 40, tri_pos.Y);
-
-            TestSprite = new SimpleSprite("main_bg");
-            TestSprite.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.CENTER);
-            Vector2f sprite_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.CENTER);
-            TestSprite.SetPosition(sprite_pos.X, sprite_pos.Y);
-
-            TestLine = new Line(new Vector2f(40, 40), new Vector2f(230, 150), Color.Cyan, Color.Red);
-
-            TestSpriteButton = new SpriteButton("main_bg");
-            TestSpriteButton.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
-            TestSpriteButton.SetPosition(Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).X, Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).Y);
-
-            TestSpriteButton2 = new SpriteButton("main_bg",TestButtonAction);
-            TestSpriteButton2.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
-            TestSpriteButton2.SetPosition(Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).X - 150, Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).Y);
-
+            FPS_TEXT.RenderLayer = 999;//Render Last
         }
 
 
@@ -91,19 +50,7 @@ namespace music_player_app.Music_Player
             }
             if (e.Code == Keyboard.Key.A)
             {
-                //TestSpriteButton.IsActive = false;
-                //Log.Print("TEST: " + TestRect.IsActive.ToString());
-                //Audio.SetStatus(SoundPlayer.SoundPlayer.PlayingStatusType.PLAY);
             }
-        }
-
-        protected override void onMouseButtonReleased(object sender, MouseButtonEventArgs e)
-        {
-        }
-
-        private void TestButtonAction()
-        {
-            Exit();
         }
 
 

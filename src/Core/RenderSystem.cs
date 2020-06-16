@@ -1,5 +1,6 @@
 ﻿using Core.UI.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core
 {
@@ -15,11 +16,19 @@ namespace Core
         public void AddToRenderList(IRenderable elem)
         {
             RenderList.Add(elem);
+            SortRenderList();
         }
 
         public void RemoveFromRenderList(IRenderable elem)
         {
             RenderList.Remove(elem);
+            SortRenderList();
+        }
+
+        public void SortRenderList()
+        {
+            List<IRenderable> sortedList = RenderList.OrderBy(e => e.RenderLayer).ToList();
+            RenderList = sortedList;
         }
 
         public List<IRenderable> GetRenderList()

@@ -1,5 +1,4 @@
 ﻿using Core.UI.Interfaces;
-using SFML.System;
 using System;
 
 namespace Core.UI

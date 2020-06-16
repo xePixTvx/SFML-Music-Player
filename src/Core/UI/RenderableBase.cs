@@ -29,7 +29,11 @@ namespace Core.UI
         public virtual int RenderLayer
         {
             get { return renderLayer; }
-            set { renderLayer = value; }
+            set 
+            { 
+                renderLayer = value;
+                Core.App.RenderSys.SortRenderList();
+            }
         }
 
         public virtual void Render()

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.UI
+﻿namespace Core.UI
 {
     public enum Position_Horizontal_Alignment
     {

@@ -12,9 +12,6 @@ namespace Core.Config
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
-        /* [DllImport("kernel32")]
-         private static extern int GetPrivateProfileSection(string section, StringBuilder retVal,int size,string filePath);*/
-
         public IniFile(string INIPath)
         {
             path = INIPath;
@@ -30,12 +27,5 @@ namespace Core.Config
             return temp.ToString();
 
         }
-
-        /* public string IniSectionExists(string Section)
-         {
-             StringBuilder temp = new StringBuilder(255);
-             int i = GetPrivateProfileSection(Section, temp, 255, this.path);
-             return temp.ToString();
-         }*/
     }
 }
