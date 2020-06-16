@@ -23,15 +23,15 @@ namespace Core
             Texture
         };
 
-        public void Load(AssetType type, string filePath, string name)
+        public void Load(AssetType type, string file, string name)
         {
             if(type == AssetType.Font)
             {
-                FontList.Add(new FontAsset(filePath, name));
+                FontList.Add(new FontAsset(file, name));
             }
             else if(type == AssetType.Texture)
             {
-                TextureList.Add(new TextureAsset(filePath, name));
+                TextureList.Add(new TextureAsset(file, name));
             }
             else
             {

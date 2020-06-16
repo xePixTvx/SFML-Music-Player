@@ -13,6 +13,11 @@ namespace Core
         /*[DllImport("kernel32.dll")]
         static extern bool FreeConsole();*/
 
+        //Resource Folder
+        public static string ResourceFolder { get; private set; }
+        public static string FontFolder = "fonts";
+        public static string TextureFolder = "textures";
+
         //Config/Setting
         public static ConfigFile Config;
         public static bool setting_ShowLogInConsole;
@@ -50,8 +55,10 @@ namespace Core
         public static Font default_font { get; private set; }
         public static Texture default_texture { get; private set; }
 
-        protected App(string _ConfigFileName, string window_title)
+        protected App(string _ConfigFileName, string window_title, string ResourceFolderName)
         {
+            ResourceFolder = Path.Combine(Environment.CurrentDirectory, ResourceFolderName);
+
             //Config/Setting Stuff
             Config = new ConfigFile(_ConfigFileName);
             setting_ShowLogInConsole = (Config.getConfigSetting("MAIN", "ShowLogInConsole", "false") == "true") ? true : false;
@@ -189,7 +196,7 @@ namespace Core
             //Default Font
             try
             {
-                default_font = new Font(Path.Combine("data", "fonts", "default.ttf"));
+                default_font = new Font(Path.Combine(ResourceFolder, FontFolder, "default.ttf"));
                 Log.Print("Default Font Loaded");
             }
             catch (Exception e)
@@ -201,7 +208,7 @@ namespace Core
             //Default Texture
             try
             {
-                default_texture = new Texture(Path.Combine("data", "textures", "default.png"));
+                default_texture = new Texture(Path.Combine(ResourceFolder, TextureFolder, "default.png"));
                 default_texture.Repeated = true;
                 Log.Print("Default Texture Loaded");
             }

@@ -47,6 +47,9 @@ namespace Core
 
         public void LoggerDispose()
         {
+            Print("---------------------------------------");
+            Print("");
+            Print("");
             Writer_Main.Dispose();
             Writer_Error.Dispose();
             Writer_Asset.Dispose();

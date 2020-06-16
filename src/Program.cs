@@ -10,7 +10,7 @@ namespace music_player_app
         private static Music_Player.Main player;
         static void Main(string[] args)
         {
-            player = new Music_Player.Main("dev_config.ini", "--- Test Window Title ---");
+            player = new Music_Player.Main("dev_config.ini", "--- Test Window Title ---", "data");
             player.Start();
         }
     }

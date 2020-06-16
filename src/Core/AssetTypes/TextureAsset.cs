@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using System;
+using System.IO;
 
 namespace Core.AssetTypes
 {
@@ -8,17 +9,17 @@ namespace Core.AssetTypes
         private string Name;
         public Texture texture;
 
-        public TextureAsset(string path, string name)
+        public TextureAsset(string file, string name)
         {
             Name = name;
             try
             {
-                texture = new Texture(path);
-                Core.App.Log.Print("Texture: " + path + " Loaded as: " + name, LoggerType.ASSET);
+                texture = new Texture(Path.Combine(Core.App.ResourceFolder, Core.App.TextureFolder, file));
+                Core.App.Log.Print("Texture: " + file + " Loaded as: " + name, LoggerType.ASSET);
             }
             catch (Exception e)
             {
-                Core.App.Log.Print("Failed to load Texture: " + path, LoggerType.ASSET);
+                Core.App.Log.Print("Failed to load Texture: " + file, LoggerType.ASSET);
                 Core.App.Log.Print(e.ToString(), LoggerType.ASSET);
                 texture = Core.App.default_texture;
             }

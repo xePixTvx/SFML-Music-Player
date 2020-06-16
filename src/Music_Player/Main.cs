@@ -6,6 +6,7 @@ using Core;
 using Core.UI;
 using Core.UI.Primitives;
 using SFML.System;
+using music_player_app.Music_Player.SoundPlayer;
 
 namespace music_player_app.Music_Player
 {
@@ -13,15 +14,17 @@ namespace music_player_app.Music_Player
     {
         private SimpleText FPS_TEXT;
 
-        public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
+        private AudioPlayer Audio_Player;
+
+        public Main(string ConfigFileName, string WindowTitle, string ResourceFolderName) : base(ConfigFileName, WindowTitle, ResourceFolderName)
         {
             //Load Assets
-            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "MAIN_BACKGROUND.jpg"), "main_bg");
-            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_play.png"), "button_play");
-            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_pause.png"), "button_pause");
-            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_reload.png"), "button_reload");
-            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_next.png"), "button_next");
-            AsManager.Load(AssetManager.AssetType.Texture, Path.Combine(Environment.CurrentDirectory, "data", "textures", "texture_button_previous.png"), "button_previous");
+            AsManager.Load(AssetManager.AssetType.Texture, "MAIN_BACKGROUND.jpg", "main_bg");
+            AsManager.Load(AssetManager.AssetType.Texture, "texture_button_play.png", "button_play");
+            AsManager.Load(AssetManager.AssetType.Texture, "texture_button_pause.png", "button_pause");
+            AsManager.Load(AssetManager.AssetType.Texture, "texture_button_reload.png", "button_reload");
+            AsManager.Load(AssetManager.AssetType.Texture, "texture_button_next.png", "button_next");
+            AsManager.Load(AssetManager.AssetType.Texture, "texture_button_previous.png", "button_previous");
 
             //FPS Text
             FPS_TEXT = new SimpleText("default", Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
@@ -29,6 +32,11 @@ namespace music_player_app.Music_Player
             Vector2f fps_main_pos = Utils.GetPosition(Position_Horizontal_Alignment.LEFT, Position_Vertical_Alignment.TOP);
             FPS_TEXT.SetPosition(fps_main_pos.X, fps_main_pos.Y);
             FPS_TEXT.RenderLayer = 999;//Render Last
+
+
+
+            Audio_Player = new AudioPlayer();//TESTING
+            Audio_Player.LoadAudio(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));
         }
 
 
@@ -50,6 +58,15 @@ namespace music_player_app.Music_Player
             }
             if (e.Code == Keyboard.Key.A)
             {
+                Audio_Player.SetPlayingStatus(AudioPlayer.PlayingStatus.PLAY);
+            }
+            if (e.Code == Keyboard.Key.S)
+            {
+                Audio_Player.SetPlayingStatus(AudioPlayer.PlayingStatus.PAUSE);
+            }
+            if (e.Code == Keyboard.Key.D)
+            {
+                Audio_Player.SetPlayingStatus(AudioPlayer.PlayingStatus.STOP);
             }
         }
 
