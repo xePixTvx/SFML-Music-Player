@@ -20,6 +20,7 @@ namespace music_player_app.Music_Player
         private SimpleSprite TestSprite;
         private Line TestLine;
         private SpriteButton TestSpriteButton;
+        private SpriteButton TestSpriteButton2;
 
         public Main(string ConfigFileName, string WindowTitle) : base(ConfigFileName, WindowTitle)
         {
@@ -65,6 +66,10 @@ namespace music_player_app.Music_Player
             TestSpriteButton.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
             TestSpriteButton.SetPosition(Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).X, Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).Y);
 
+            TestSpriteButton2 = new SpriteButton("main_bg",TestButtonAction);
+            TestSpriteButton2.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
+            TestSpriteButton2.SetPosition(Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).X - 150, Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM).Y);
+
         }
 
 
@@ -86,6 +91,7 @@ namespace music_player_app.Music_Player
             }
             if (e.Code == Keyboard.Key.A)
             {
+                //TestSpriteButton.IsActive = false;
                 //Log.Print("TEST: " + TestRect.IsActive.ToString());
                 //Audio.SetStatus(SoundPlayer.SoundPlayer.PlayingStatusType.PLAY);
             }

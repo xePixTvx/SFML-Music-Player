@@ -22,6 +22,11 @@ namespace Core
             RenderList.Remove(elem);
         }
 
+        public List<IRenderable> GetRenderList()
+        {
+            return RenderList;
+        }
+
         public void Render()
         {
             foreach(IRenderable elem in RenderList)

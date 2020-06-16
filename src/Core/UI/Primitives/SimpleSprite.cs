@@ -17,15 +17,6 @@ namespace Core.UI.Primitives
             Core.App.RenderSys.AddToRenderList(this);
         }
 
-        public override bool IsActive { get => base.IsActive; set => base.IsActive = value; }
-        public override bool IsVisible { get => base.IsVisible; set => base.IsVisible = value; }
-        public override int RenderLayer { get => base.RenderLayer; set => base.RenderLayer = value; }
-
-        public override Origin_Horizontal_Alignment Origin_H_Align { get => base.Origin_H_Align; set => base.Origin_H_Align = value; }
-        public override Origin_Vertical_Alignment Origin_V_Align { get => base.Origin_V_Align; set => base.Origin_V_Align = value; }
-        public override Vector2f Position { get => base.Position; set => base.Position = value; }
-        public override float Rotation { get => base.Rotation; set => base.Rotation = value; }
-
         public override void SetOrigin(Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
         {
             Origin_H_Align = h_align;

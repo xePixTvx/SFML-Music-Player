@@ -16,10 +16,6 @@ namespace Core.UI.Primitives
             Core.App.RenderSys.AddToRenderList(this);
         }
 
-        public override bool IsActive { get => base.IsActive; set => base.IsActive = value; }
-        public override bool IsVisible { get => base.IsVisible; set => base.IsVisible = value; }
-        public override int RenderLayer { get => base.RenderLayer; set => base.RenderLayer = value; }
-
         public override void Render()
         {
             if (IsVisible)

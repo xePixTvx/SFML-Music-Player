@@ -1,33 +1,23 @@
-﻿using Core.UI.Interfaces;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
 using System;
 
 namespace Core.UI.Controls
 {
-    class SpriteButton : RenderableBase, IClickable
+    class SpriteButton : ClickableBase
     {
         private Sprite shape;
-        private bool isSelected = false;
 
-        public SpriteButton(string texture_name)
+        public SpriteButton(string texture_name, Action action = null)
         {
             Sprite construct_shape = new Sprite
             {
                 Texture = Core.App.AsManager.getTexture(texture_name)
             };
             shape = construct_shape;
+            ExecAction = action;
             Core.App.RenderSys.AddToRenderList(this);
         }
-
-        public override bool IsActive { get => base.IsActive; set => base.IsActive = value; }
-        public override bool IsVisible { get => base.IsVisible; set => base.IsVisible = value; }
-        public override int RenderLayer { get => base.RenderLayer; set => base.RenderLayer = value; }
-
-        public override Origin_Horizontal_Alignment Origin_H_Align { get => base.Origin_H_Align; set => base.Origin_H_Align = value; }
-        public override Origin_Vertical_Alignment Origin_V_Align { get => base.Origin_V_Align; set => base.Origin_V_Align = value; }
-        public override Vector2f Position { get => base.Position; set => base.Position = value; }
-        public override float Rotation { get => base.Rotation; set => base.Rotation = value; }
 
         public override void SetOrigin(Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
         {
@@ -49,21 +39,17 @@ namespace Core.UI.Controls
             shape.Rotation = rotation;
         }
 
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set { isSelected = value; }
-        }
-
-        public void UpdateSelection()
+        public override void UpdateSelection()
         {
             IsSelected = (Utils.isHovered(shape)==true) ? true : false;
 
             if (IsSelected)//do it in Render()?????
             {
+                shape.Color = new Color(255, 255, 255, 255);
             }
             else
             {
+                shape.Color = new Color(255, 255, 255, 130);
             }
         }
 

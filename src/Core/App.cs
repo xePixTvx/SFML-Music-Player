@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Core.Config;
+using Core.UI.Interfaces;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -107,10 +108,27 @@ namespace Core
             window.Closed += (_, __) => Exit();
             window.LostFocus += (_, __) => Log.Print("Lost Focus");
             window.GainedFocus += (_, __) => Log.Print("Gained Focus");
+            window.MouseButtonReleased += new EventHandler<MouseButtonEventArgs>(onMouseButtonReleased_ClickableElems);
             window.MouseButtonReleased += new EventHandler<MouseButtonEventArgs>(onMouseButtonReleased);
             window.MouseButtonPressed += new EventHandler<MouseButtonEventArgs>(onMouseButtonPressed);
             window.KeyReleased += new EventHandler<KeyEventArgs>(onKeyReleased);
             window.KeyPressed += new EventHandler<KeyEventArgs>(onKeyPressed);
+        }
+        private void onMouseButtonReleased_ClickableElems(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Button == Mouse.Button.Left)
+            {
+                foreach (IRenderable elem in RenderSys.GetRenderList())
+                {
+                    if (elem.IsActive && elem is IClickable clickElem)
+                    {
+                        if (clickElem.IsSelected)
+                        {
+                            clickElem.ExecuteAction();
+                        }
+                    }
+                }
+            }
         }
         protected virtual void onMouseButtonReleased(object sender, MouseButtonEventArgs e)
         {
