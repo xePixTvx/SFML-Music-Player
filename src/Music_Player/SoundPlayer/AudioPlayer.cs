@@ -4,7 +4,8 @@ namespace music_player_app.Music_Player.SoundPlayer
 {
     class AudioPlayer
     {
-        private Sound sf_player;
+        private Sound sf_sound;
+        private SoundBuffer sf_buffer;
 
         public enum PlayingStatus
         {
@@ -18,15 +19,13 @@ namespace music_player_app.Music_Player.SoundPlayer
 
         public AudioPlayer()
         {
-            sf_player = new Sound();
+            sf_sound = new Sound();
         }
-
-
 
 
         public bool IsAudioLoaded()
         {
-            if(sf_player.SoundBuffer != null)
+            if(sf_sound.SoundBuffer != null)
             {
                 return true;
             }
@@ -34,17 +33,13 @@ namespace music_player_app.Music_Player.SoundPlayer
         }
         public SoundBuffer GetLoadedAudioBuffer()
         {
-            return sf_player.SoundBuffer;
+            return sf_sound.SoundBuffer;
         }
         public void LoadAudio(string file)
         {
-            SoundBuffer buffer = new SoundBuffer(file);
-            sf_player.SoundBuffer = buffer;
+            sf_buffer = new SoundBuffer(file);
+            sf_sound.SoundBuffer = sf_buffer;
         }
-
-
-
-
 
 
         public void SetPlayingStatus(PlayingStatus status)
@@ -55,15 +50,15 @@ namespace music_player_app.Music_Player.SoundPlayer
             }
             if (status == PlayingStatus.PLAY)
             {
-                sf_player.Play();
+                sf_sound.Play();
             }
             else if (status == PlayingStatus.PAUSE)
             {
-                sf_player.Pause();
+                sf_sound.Pause();
             }
             else
             {
-                sf_player.Stop();
+                sf_sound.Stop();
             }
         }
 
@@ -73,20 +68,22 @@ namespace music_player_app.Music_Player.SoundPlayer
             {
                 return PlayingStatus.STOP;
             }
-            if (sf_player.Status == SoundStatus.Playing)
+            if (sf_sound.Status == SoundStatus.Playing)
             {
                 return PlayingStatus.PLAY;
             }
-            else if (sf_player.Status == SoundStatus.Paused)
+            else if (sf_sound.Status == SoundStatus.Paused)
             {
                 return PlayingStatus.PAUSE;
             }
-            else if (sf_player.Status == SoundStatus.Stopped)
+            else if (sf_sound.Status == SoundStatus.Stopped)
             {
                 return PlayingStatus.STOP;
             }
             SetPlayingStatus(PlayingStatus.STOP);
             return PlayingStatus.STOP;
         }
+
+
     }
 }

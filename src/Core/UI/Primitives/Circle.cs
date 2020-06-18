@@ -38,6 +38,13 @@ namespace Core.UI.Primitives
             shape.Rotation = rotation;
         }
 
+        public void SetSize(float radius)
+        {
+            shape.Radius = radius;
+            SetOrigin(Origin_H_Align, Origin_V_Align);
+            SetPosition(Position.X, Position.Y);
+        }
+
         public override void Render()
         {
             if (IsVisible)

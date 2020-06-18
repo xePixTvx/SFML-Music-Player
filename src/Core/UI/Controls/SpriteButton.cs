@@ -53,6 +53,13 @@ namespace Core.UI.Controls
             }
         }
 
+        public void SetTexture(string texture_name)
+        {
+            shape.Texture = Core.App.AsManager.getTexture(texture_name);
+            SetOrigin(Origin_H_Align, Origin_V_Align);
+            SetPosition(Position.X, Position.Y);
+        }
+
         public override void Render()
         {
             if (IsVisible)

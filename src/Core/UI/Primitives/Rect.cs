@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using Core.UI.Interfaces;
+using SFML.Graphics;
 using SFML.System;
 
 namespace Core.UI.Primitives
@@ -36,6 +37,13 @@ namespace Core.UI.Primitives
         public override void SetRotation(float rotation)
         {
             shape.Rotation = rotation;
+        }
+
+        public void SetSize(float width, float height)
+        {
+            shape.Size = new Vector2f(width, height);
+            SetOrigin(Origin_H_Align, Origin_V_Align);
+            SetPosition(Position.X, Position.Y);
         }
 
         public override void Render()
