@@ -37,15 +37,15 @@ namespace Core
         public static RenderSystem RenderSys;
 
         //Window
-        public static RenderWindow window { get; private set; }
-        public static VideoMode window_size { get; private set; }
-        public bool isActive { get; private set; } = false;
-        private Color window_background_color;
+        public static RenderWindow Window { get; private set; }
+        public static VideoMode Window_size { get; private set; }
+        public bool IsActive { get; private set; } = false;
+        private Color Window_background_color;
 
         //Frame Time/Rate
-        private Clock frameTimeClock;
-        private uint frameRateLimit = 60;
-        private float frameTime;
+        private Clock FrameTimeClock;
+        private uint FrameRateLimit = 60;
+        private float FrameTime;
 
         //App Update
         protected abstract void Update();
@@ -69,8 +69,8 @@ namespace Core
             setting_backupLogFiles = (Config.getConfigSetting("MAIN", "backupLogFiles", "true") == "true") ? true : false;
 
             Log = new Logger(setting_ShowLogInConsole, setting_backupLogFiles);
-            window_background_color = new Color(0, 0, 0);
-            window_size = new VideoMode(setting_window_width, setting_window_height);
+            Window_background_color = new Color(0, 0, 0);
+            Window_size = new VideoMode(setting_window_width, setting_window_height);
             InitWindow(window_title, setting_window_style);
             AsManager = new AssetManager();
             if (!LoadDefaultAssets())
@@ -84,7 +84,7 @@ namespace Core
         public void Start()
         {
             Log.Print("Start Main Loop");
-            isActive = true;
+            IsActive = true;
             MainLoop();
             //FreeConsole();
         }
@@ -92,9 +92,9 @@ namespace Core
         {
             Log.Print("Exit App");
             Log.Print("---------- Music_Player EXIT ----------");
-            isActive = false;
+            IsActive = false;
             Log.LoggerDispose();
-            window.Close();
+            Window.Close();
         }
 
 
@@ -103,23 +103,23 @@ namespace Core
         private void InitWindow(string title, Styles style)
         {
             Log.Print("Init Window");
-            window = new RenderWindow(window_size, title, style);
-            window.SetVerticalSyncEnabled(false);
-            window.SetFramerateLimit(frameRateLimit);
+            Window = new RenderWindow(Window_size, title, style);
+            Window.SetVerticalSyncEnabled(false);
+            Window.SetFramerateLimit(FrameRateLimit);
             InitWindowEventHandlers();
         }
 
         private void InitWindowEventHandlers()
         {
             Log.Print("Init Event Handlers");
-            window.Closed += (_, __) => Exit();
-            window.LostFocus += (_, __) => Log.Print("Lost Focus");
-            window.GainedFocus += (_, __) => Log.Print("Gained Focus");
-            window.MouseButtonReleased += new EventHandler<MouseButtonEventArgs>(onMouseButtonReleased_ClickableElems);
-            window.MouseButtonReleased += new EventHandler<MouseButtonEventArgs>(onMouseButtonReleased);
-            window.MouseButtonPressed += new EventHandler<MouseButtonEventArgs>(onMouseButtonPressed);
-            window.KeyReleased += new EventHandler<KeyEventArgs>(onKeyReleased);
-            window.KeyPressed += new EventHandler<KeyEventArgs>(onKeyPressed);
+            Window.Closed += (_, __) => Exit();
+            Window.LostFocus += (_, __) => Log.Print("Lost Focus");
+            Window.GainedFocus += (_, __) => Log.Print("Gained Focus");
+            Window.MouseButtonReleased += new EventHandler<MouseButtonEventArgs>(onMouseButtonReleased_ClickableElems);
+            Window.MouseButtonReleased += new EventHandler<MouseButtonEventArgs>(onMouseButtonReleased);
+            Window.MouseButtonPressed += new EventHandler<MouseButtonEventArgs>(onMouseButtonPressed);
+            Window.KeyReleased += new EventHandler<KeyEventArgs>(onKeyReleased);
+            Window.KeyPressed += new EventHandler<KeyEventArgs>(onKeyPressed);
         }
         private void onMouseButtonReleased_ClickableElems(object sender, MouseButtonEventArgs e)
         {
@@ -159,15 +159,15 @@ namespace Core
         #region Main Loop
         private void MainLoop()
         {
-            frameTimeClock = new Clock();
-            while (isActive)
+            FrameTimeClock = new Clock();
+            while (IsActive)
             {
-                window.DispatchEvents();
-                window.Clear(window_background_color);
+                Window.DispatchEvents();
+                Window.Clear(Window_background_color);
                 Update();
                 RenderSys.Render();
-                window.Display();
-                frameTime = frameTimeClock.Restart().AsMilliseconds();
+                Window.Display();
+                FrameTime = FrameTimeClock.Restart().AsMilliseconds();
                 if(DefaultAssetLoadFailed)
                 {
                     Exit();
@@ -180,11 +180,11 @@ namespace Core
         #region Frame Time/Rate
         public float getFrameTime()
         {
-            return frameTime;
+            return FrameTime;
         }
         public uint getFPS()
         {
-            uint fps = frameRateLimit * ((uint)frameTime * frameRateLimit) / 1000;
+            uint fps = FrameRateLimit * ((uint)FrameTime * FrameRateLimit) / 1000;
             return fps;
         }
         #endregion

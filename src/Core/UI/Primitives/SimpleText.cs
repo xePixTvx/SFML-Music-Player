@@ -52,7 +52,7 @@ namespace Core.UI.Primitives
         {
             if (IsVisible)
             {
-                Core.App.window.Draw(shape);
+                Core.App.Window.Draw(shape);
             }
         }
     }

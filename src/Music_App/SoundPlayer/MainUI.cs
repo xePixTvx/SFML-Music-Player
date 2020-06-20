@@ -1,9 +1,8 @@
 ﻿using Core.UI;
 using Core.UI.Controls;
-using Core.UI.Primitives;
 using SFML.System;
 
-namespace music_player_app.Music_Player.SoundPlayer
+namespace music_player_app.Music_App.SoundPlayer
 {
     class MainUI
     {
@@ -13,6 +12,8 @@ namespace music_player_app.Music_Player.SoundPlayer
         private SpriteButton PREV_SONG_BUTTON;
 
         private SpriteButton VOLUME_MENU_OPEN_BUTTON;
+
+        //private Rect PLAYING_OFFSET_BG;
 
         public MainUI()
         {
@@ -48,6 +49,12 @@ namespace music_player_app.Music_Player.SoundPlayer
             VOLUME_MENU_OPEN_BUTTON.SetOrigin(Origin_Horizontal_Alignment.RIGHT, Origin_Vertical_Alignment.BOTTOM);
             VOLUME_MENU_OPEN_BUTTON.SetPosition(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 15);
             VOLUME_MENU_OPEN_BUTTON.RenderLayer = 0;
+
+
+            /*PLAYING_OFFSET_BG = new Rect(400, 10, new Color(255, 255, 255, 130));
+            PLAYING_OFFSET_BG.SetOrigin(Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
+            PLAYING_OFFSET_BG.SetPosition(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 85);
+            PLAYING_OFFSET_BG.RenderLayer = 0;*/
         }
 
 

@@ -6,9 +6,9 @@ using Core;
 using Core.UI;
 using Core.UI.Primitives;
 using SFML.System;
-using music_player_app.Music_Player.SoundPlayer;
+using music_player_app.Music_App.SoundPlayer;
 
-namespace music_player_app.Music_Player
+namespace music_player_app.Music_App
 {
     class Main : App
     {
@@ -55,10 +55,6 @@ namespace music_player_app.Music_Player
                 dev_cross_vertical_line = new Line(dev_cross_v_pos_start, dev_cross_v_pos_end, new Color(255, 0, 0, 255), new Color(255, 0, 0, 255));
                 dev_cross_vertical_line.RenderLayer = 999;
             }
-
-
-
-
 
 
             Audio_Player = new AudioPlayer();

@@ -17,7 +17,7 @@ namespace Core.UI
 
         public static bool isHovered(Sprite sprite)
         {
-            RenderWindow window = Core.App.window;
+            RenderWindow window = Core.App.Window;
             if (sprite.GetGlobalBounds().Contains(Mouse.GetPosition(window).X, Mouse.GetPosition(window).Y) && window.HasFocus())
             {
                 return true;
@@ -26,7 +26,7 @@ namespace Core.UI
         }
         public static bool isHovered(RectangleShape rect)
         {
-            RenderWindow window = Core.App.window;
+            RenderWindow window = Core.App.Window;
             if (rect.GetGlobalBounds().Contains(Mouse.GetPosition(window).X, Mouse.GetPosition(window).Y) && window.HasFocus())
             {
                 return true;

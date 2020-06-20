@@ -1,6 +1,6 @@
 ﻿using SFML.Audio;
 
-namespace music_player_app.Music_Player.SoundPlayer
+namespace music_player_app.Music_App.SoundPlayer
 {
     class AudioPlayer
     {

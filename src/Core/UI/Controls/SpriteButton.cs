@@ -64,7 +64,7 @@ namespace Core.UI.Controls
         {
             if (IsVisible)
             {
-                Core.App.window.Draw(shape);
+                Core.App.Window.Draw(shape);
             }
         }
     }
