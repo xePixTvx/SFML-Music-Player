@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Core.Config;
+using Core.UI;
+using Core.UI.Primitives;
 using Core.UI.Interfaces;
 using SFML.Graphics;
 using SFML.System;
@@ -24,6 +26,9 @@ namespace Core
         public static bool Setting_showFps;
         public static bool Setting_backupLogFiles;
 
+        //FPS Text
+        private SimpleText FPS_TEXT;
+
         //Logger
         public static Logger Log;
 
@@ -46,6 +51,9 @@ namespace Core
 
         //App Update
         protected abstract void Update();
+
+        //On App Close
+        protected abstract void OnAppClosing();
 
         //Default Assets
         private bool DefaultAssetLoadFailed = false;
@@ -75,7 +83,20 @@ namespace Core
                 Log.Print("DefaultAssetLoadFailed == true", LoggerType.ERROR);
                 DefaultAssetLoadFailed = true;
             }
+
             RenderSys = new RenderSystem();
+
+            //Create FPS Text
+            FPS_TEXT = new SimpleText("default", Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
+            FPS_TEXT.Origin_H_Align = Origin_Horizontal_Alignment.LEFT;
+            FPS_TEXT.Origin_V_Align = Origin_Vertical_Alignment.TOP;
+            Vector2f fps_main_pos = Utils.GetPosition(Position_Horizontal_Alignment.LEFT, Position_Vertical_Alignment.TOP);
+            FPS_TEXT.Position = new Vector2f(fps_main_pos.X, fps_main_pos.Y);
+            FPS_TEXT.RenderLayer = 999;//Render Last
+            if (!Setting_showFps)
+            {
+                FPS_TEXT.IsActive = false;
+            }
         }
 
         public void Start()
@@ -87,6 +108,7 @@ namespace Core
         }
         public void Exit()
         {
+            OnAppClosing();
             Log.Print("Exit App");
             Log.Print("---------- Music_Player EXIT ----------");
             IsActive = false;
@@ -161,6 +183,13 @@ namespace Core
             {
                 Window.DispatchEvents();
                 Window.Clear(WindowBackgroundColor);
+
+                //Update FPS Text
+                if (Setting_showFps && FPS_TEXT.IsActive)
+                {
+                    FPS_TEXT.String = "FPS: " + GetFPS() + " ------ " + GetFrameTime() + " MS";
+                }
+
                 Update();
                 RenderSys.Render();
                 Window.Display();
