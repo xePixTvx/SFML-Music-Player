@@ -20,12 +20,12 @@ namespace Core
 
         //Config/Setting
         public static ConfigFile Config;
-        public static bool setting_ShowLogInConsole;
-        public static UInt32 setting_window_width;
-        public static UInt32 setting_window_height;
-        public static Styles setting_window_style;
-        public static bool setting_showFps;
-        public static bool setting_backupLogFiles;
+        public static bool Setting_ShowLogInConsole;
+        public static UInt32 Setting_window_width;
+        public static UInt32 Setting_window_height;
+        public static Styles Setting_window_style;
+        public static bool Setting_showFps;
+        public static bool Setting_backupLogFiles;
 
         //Logger
         public static Logger Log;
@@ -61,17 +61,17 @@ namespace Core
 
             //Config/Setting Stuff
             Config = new ConfigFile(_ConfigFileName);
-            setting_ShowLogInConsole = (Config.getConfigSetting("MAIN", "ShowLogInConsole", "false") == "true") ? true : false;
-            setting_window_width = Convert.ToUInt32(Config.getConfigSetting("MAIN", "window_width", "800"));//lock it???
-            setting_window_height = Convert.ToUInt32(Config.getConfigSetting("MAIN", "window_height", "600"));//lock it???
-            setting_showFps = (Config.getConfigSetting("MAIN", "showFps", "false") == "true") ? true : false;
-            setting_window_style = Styles.Close;
-            setting_backupLogFiles = (Config.getConfigSetting("MAIN", "backupLogFiles", "true") == "true") ? true : false;
+            Setting_ShowLogInConsole = (Config.GetConfigSetting("MAIN", "ShowLogInConsole", "false") == "true") ? true : false;
+            Setting_window_width = Convert.ToUInt32(Config.GetConfigSetting("MAIN", "window_width", "800"));//lock it???
+            Setting_window_height = Convert.ToUInt32(Config.GetConfigSetting("MAIN", "window_height", "600"));//lock it???
+            Setting_showFps = (Config.GetConfigSetting("MAIN", "showFps", "false") == "true") ? true : false;
+            Setting_window_style = Styles.Close;
+            Setting_backupLogFiles = (Config.GetConfigSetting("MAIN", "backupLogFiles", "true") == "true") ? true : false;
 
-            Log = new Logger(setting_ShowLogInConsole, setting_backupLogFiles);
+            Log = new Logger(Setting_ShowLogInConsole, Setting_backupLogFiles);
             Window_background_color = new Color(0, 0, 0);
-            Window_size = new VideoMode(setting_window_width, setting_window_height);
-            InitWindow(window_title, setting_window_style);
+            Window_size = new VideoMode(Setting_window_width, Setting_window_height);
+            InitWindow(window_title, Setting_window_style);
             AsManager = new AssetManager();
             if (!LoadDefaultAssets())
             {
@@ -178,11 +178,11 @@ namespace Core
 
 
         #region Frame Time/Rate
-        public float getFrameTime()
+        public float GetFrameTime()
         {
             return FrameTime;
         }
-        public uint getFPS()
+        public uint GetFPS()
         {
             uint fps = FrameRateLimit * ((uint)FrameTime * FrameRateLimit) / 1000;
             return fps;

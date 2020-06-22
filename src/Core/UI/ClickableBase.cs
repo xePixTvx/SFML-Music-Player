@@ -5,19 +5,19 @@ namespace Core.UI
 {
     class ClickableBase : RenderableBase, IClickable
     {
-        private bool isSelected = false;
-        private Action execAction = null;
+        private bool _IsSelected = false;
+        private Action _ExecAction = null;
 
         public virtual bool IsSelected
         {
-            get { return isSelected; }
-            set { isSelected = value; }
+            get { return _IsSelected; }
+            set { _IsSelected = value; }
         }
 
         public virtual Action ExecAction
         {
-            get { return execAction; }
-            set { execAction = value; }
+            get { return _ExecAction; }
+            set { _ExecAction = value; }
         }
 
         public virtual void UpdateSelection()

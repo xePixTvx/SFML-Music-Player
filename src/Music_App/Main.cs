@@ -66,9 +66,9 @@ namespace music_player_app.Music_App
 
         protected override void Update()
         {
-            if (setting_showFps)
+            if (Setting_showFps)
             {
-                FPS_TEXT.SetText("FPS: " + getFPS() + " ------ " + getFrameTime() + " MS");
+                FPS_TEXT.SetText("FPS: " + GetFPS() + " ------ " + GetFrameTime() + " MS");
             }
         }
 

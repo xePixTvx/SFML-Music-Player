@@ -9,19 +9,17 @@ namespace Core
         List<FontAsset> FontList = new List<FontAsset>();
         List<TextureAsset> TextureList = new List<TextureAsset>();
 
+        public enum AssetType
+        {
+            Font,
+            Texture
+        };
 
         public AssetManager()
         {
             FontList.Clear();
             TextureList.Clear();
         }
-
-
-        public enum AssetType
-        {
-            Font,
-            Texture
-        };
 
         public void Load(AssetType type, string file, string name)
         {
@@ -39,7 +37,7 @@ namespace Core
             }
         }
 
-        public Font getFont(string name)
+        public Font GetFont(string name)
         {
             if(name == "default")
             {
@@ -47,15 +45,15 @@ namespace Core
             }
             foreach(FontAsset _font in FontList)
             {
-                if(_font.getName() == name)
+                if(_font.Name == name)
                 {
-                    return _font.font;
+                    return _font.Font;
                 }
             }
             return Core.App.default_font;
         }
 
-        public Texture getTexture(string name)
+        public Texture GetTexture(string name)
         {
             if (name == "default")
             {
@@ -63,9 +61,9 @@ namespace Core
             }
             foreach (TextureAsset _texture in TextureList)
             {
-                if (_texture.getName() == name)
+                if (_texture.Name == name)
                 {
-                    return _texture.texture;
+                    return _texture.Texture;
                 }
             }
             return Core.App.default_texture;

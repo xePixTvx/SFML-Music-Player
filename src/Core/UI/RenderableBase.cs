@@ -5,33 +5,33 @@ namespace Core.UI
 {
     class RenderableBase : IRenderable
     {
-        private bool isActive = true;
-        private bool isVisible = true;
-        private int renderLayer = 0;
-        private Origin_Horizontal_Alignment origin_H_Align = Origin_Horizontal_Alignment.LEFT;
-        private Origin_Vertical_Alignment origin_V_Align = Origin_Vertical_Alignment.TOP;
-        private Vector2f position = new Vector2f(0, 0);
-        private float rotation = 0;
+        private bool _IsActive = true;
+        private bool _IsVisible = true;
+        private int _RenderLayer = 0;
+        private Origin_Horizontal_Alignment _Origin_H_Align = Origin_Horizontal_Alignment.LEFT;
+        private Origin_Vertical_Alignment _Origin_V_Align = Origin_Vertical_Alignment.TOP;
+        private Vector2f _Position = new Vector2f(0, 0);
+        private float _Rotation = 0;
 
         #region Render
         public virtual bool IsActive
         {
-            get { return isActive; }
-            set { isActive = value; }
+            get { return _IsActive; }
+            set { _IsActive = value; }
         }
 
         public virtual bool IsVisible
         {
-            get { return isVisible; }
-            set { isVisible = value; }
+            get { return _IsVisible; }
+            set { _IsVisible = value; }
         }
 
         public virtual int RenderLayer
         {
-            get { return renderLayer; }
+            get { return _RenderLayer; }
             set 
             { 
-                renderLayer = value;
+                _RenderLayer = value;
                 Core.App.RenderSys.SortRenderList();
             }
         }
@@ -45,14 +45,14 @@ namespace Core.UI
         #region Position
         public virtual Origin_Horizontal_Alignment Origin_H_Align
         {
-            get { return origin_H_Align; }
-            set { origin_H_Align = value; }
+            get { return _Origin_H_Align; }
+            set { _Origin_H_Align = value; }
         }
 
         public virtual Origin_Vertical_Alignment Origin_V_Align
         {
-            get { return origin_V_Align; }
-            set { origin_V_Align = value; }
+            get { return _Origin_V_Align; }
+            set { _Origin_V_Align = value; }
         }
 
         public virtual void SetOrigin(Origin_Horizontal_Alignment h_align = Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment v_align = Origin_Vertical_Alignment.TOP)
@@ -62,8 +62,8 @@ namespace Core.UI
 
         public virtual Vector2f Position
         {
-            get { return position; }
-            set { position = value; }
+            get { return _Position; }
+            set { _Position = value; }
         }
 
         public virtual void SetPosition(float x, float y)
@@ -73,8 +73,8 @@ namespace Core.UI
 
         public virtual float Rotation
         {
-            get { return rotation; }
-            set { rotation = value; }
+            get { return _Rotation; }
+            set { _Rotation = value; }
         }
 
         public virtual void SetRotation(float rotation)

@@ -5,14 +5,13 @@ namespace Core.UI.Primitives
 {
     class Line : RenderableBase
     {
-        private VertexArray shape;
+        private VertexArray Shape;
 
         public Line(Vector2f start, Vector2f end, Color start_RGBA, Color end_RGBA)
         {
-            VertexArray construct_shape = new VertexArray(PrimitiveType.Lines, 2);
-            construct_shape[0] = new Vertex(start, start_RGBA);
-            construct_shape[1] = new Vertex(end, end_RGBA);
-            shape = construct_shape;
+            Shape = new VertexArray(PrimitiveType.Lines, 2);
+            Shape[0] = new Vertex(start, start_RGBA);
+            Shape[1] = new Vertex(end, end_RGBA);
             Core.App.RenderSys.AddToRenderList(this);
         }
 
@@ -20,7 +19,7 @@ namespace Core.UI.Primitives
         {
             if (IsVisible)
             {
-                Core.App.Window.Draw(shape);
+                Core.App.Window.Draw(Shape);
             }
         }
     }

@@ -19,17 +19,17 @@ namespace Core.Config
             Ini = new IniFile(Path.Combine(FileDirectory, FileName));
         }
 
-        public string getConfigSetting(string section, string key, string default_value)
+        public string GetConfigSetting(string section, string key, string default_value)
         {
             string setting = Ini.IniReadValue(section, key);
             if (setting == "")
             {
                 setting = default_value;
-                setConfigSetting(section, key, default_value);
+                SetConfigSetting(section, key, default_value);
             }
             return setting;
         }
-        public void setConfigSetting(string section, string key, string value)
+        public void SetConfigSetting(string section, string key, string value)
         {
             Ini.IniWriteValue(section, key, value);
         }

@@ -16,13 +16,13 @@ namespace Core
         private static StreamWriter Writer_Error;
         private static StreamWriter Writer_Asset;
         private static bool UseConsole;
-        private static bool backUpFullLogs;
+        private static bool BackupFullLogs;
         private static long MaxFileSize = 800000;
 
         public Logger(bool _UseConsole, bool _backUpFullLogs)
         {
             UseConsole = _UseConsole;
-            backUpFullLogs = _backUpFullLogs;
+            BackupFullLogs = _backUpFullLogs;
             string LogDirectory = Path.Combine(Environment.CurrentDirectory, "Music_Player_LOGS");
             string LogBackupDirectory = Path.Combine(Environment.CurrentDirectory, "Music_Player_LOGS" , "BACKUPS");
             string MainLogFile = Path.Combine(LogDirectory, "main_log.txt");
@@ -94,14 +94,13 @@ namespace Core
             }
         }
 
-
         private void ClearLogFileIfNeeded(string file, string backUpDir)
         {
             if (File.Exists(file))
             {
-                if (getFileSize(file) >= MaxFileSize)
+                if (GetFileSize(file) >= MaxFileSize)
                 {
-                    if (backUpFullLogs)
+                    if (BackupFullLogs)
                     {
                         int directorySize = Directory.GetFiles(backUpDir).Length;
                         string backUpStartName = (file.Contains("main")) ? "main" : (file.Contains("error")) ? "error" : "asset";
@@ -112,12 +111,11 @@ namespace Core
                 }
             }
         }
-        private long getFileSize(string filename)
+
+        private long GetFileSize(string filename)
         {
             FileInfo file = new FileInfo(filename);
             return file.Length;
         }
-
-
     }
 }

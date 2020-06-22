@@ -6,16 +6,15 @@ namespace Core.UI.Primitives
 {
     class Rect : RenderableBase
     {
-        private RectangleShape shape;
+        private RectangleShape Shape;
 
         public Rect(float width, float height, Color RGBA)
         {
-            RectangleShape construct_shape = new RectangleShape
+            Shape = new RectangleShape
             {
                 Size = new Vector2f(width, height),
                 FillColor = RGBA,
             };
-            shape = construct_shape;
             Core.App.RenderSys.AddToRenderList(this);
         }
 
@@ -23,25 +22,25 @@ namespace Core.UI.Primitives
         {
             Origin_H_Align = h_align;
             Origin_V_Align = v_align;
-            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (shape.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? shape.Size.X : 0;
-            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (shape.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? shape.Size.Y : 0;
-            shape.Origin = new Vector2f(origin_h, origin_v);
+            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (Shape.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? Shape.Size.X : 0;
+            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (Shape.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? Shape.Size.Y : 0;
+            Shape.Origin = new Vector2f(origin_h, origin_v);
         }
 
         public override void SetPosition(float x, float y)
         {
             Position = new Vector2f(x, y);
-            shape.Position = Position;
+            Shape.Position = Position;
         }
 
         public override void SetRotation(float rotation)
         {
-            shape.Rotation = rotation;
+            Shape.Rotation = rotation;
         }
 
         public void SetSize(float width, float height)
         {
-            shape.Size = new Vector2f(width, height);
+            Shape.Size = new Vector2f(width, height);
             SetOrigin(Origin_H_Align, Origin_V_Align);
             SetPosition(Position.X, Position.Y);
         }
@@ -50,7 +49,7 @@ namespace Core.UI.Primitives
         {
             if (IsVisible)
             {
-                Core.App.Window.Draw(shape);
+                Core.App.Window.Draw(Shape);
             }
         }
     }
