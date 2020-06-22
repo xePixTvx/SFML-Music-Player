@@ -1,5 +1,4 @@
 ﻿using SFML.Graphics;
-using SFML.System;
 using System;
 
 namespace Core.UI.Controls
@@ -7,35 +6,24 @@ namespace Core.UI.Controls
     class SpriteButton : ClickableBase
     {
         private Sprite Shape;
+        private string _Texture_Name;
+
+        public string Texture_Name
+        {
+            get { return _Texture_Name; }
+            set
+            {
+                _Texture_Name = value;
+                NeedsUpdate = true;
+            }
+        }
 
         public SpriteButton(string texture_name, Action action = null)
         {
-            Shape = new Sprite
-            {
-                Texture = Core.App.AsManager.GetTexture(texture_name)
-            };
+            Shape = new Sprite();
+            Texture_Name = texture_name;
             ExecAction = action;
             Core.App.RenderSys.AddToRenderList(this);
-        }
-
-        public override void SetOrigin(Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
-        {
-            Origin_H_Align = h_align;
-            Origin_V_Align = v_align;
-            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (Shape.Texture.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? Shape.Texture.Size.X : 0;
-            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (Shape.Texture.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? Shape.Texture.Size.Y : 0;
-            Shape.Origin = new Vector2f(origin_h, origin_v);
-        }
-
-        public override void SetPosition(float x, float y)
-        {
-            Position = new Vector2f(x, y);
-            Shape.Position = Position;
-        }
-
-        public override void SetRotation(float rotation)
-        {
-            Shape.Rotation = rotation;
         }
 
         public override void UpdateSelection()
@@ -52,11 +40,24 @@ namespace Core.UI.Controls
             }
         }
 
-        public void SetTexture(string texture_name)
+        public override void Update()
         {
-            Shape.Texture = Core.App.AsManager.GetTexture(texture_name);
-            SetOrigin(Origin_H_Align, Origin_V_Align);
-            SetPosition(Position.X, Position.Y);
+            if (NeedsUpdate)
+            {
+                //Update Texture
+                Shape.Texture = Core.App.AsManager.GetTexture(Texture_Name);
+
+                //Update Origin
+                Shape.Origin = Utils.GetOriginPosition(Shape, Origin_H_Align, Origin_V_Align);
+
+                //Update Position
+                Shape.Position = Position;
+
+                //Update Rotation
+                Shape.Rotation = Rotation;
+
+                NeedsUpdate = false;
+            }
         }
 
         public override void Render()

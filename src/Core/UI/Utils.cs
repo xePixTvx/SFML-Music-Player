@@ -33,5 +33,34 @@ namespace Core.UI
             }
             return false;
         }
+
+        public static Vector2f GetOriginPosition(RectangleShape Shape, Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
+        {
+            Vector2f origin;
+            origin.X = (h_align == Origin_Horizontal_Alignment.CENTER) ? (Shape.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? Shape.Size.X : 0;
+            origin.Y = (v_align == Origin_Vertical_Alignment.CENTER) ? (Shape.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? Shape.Size.Y : 0;
+            return origin;
+        }
+        public static Vector2f GetOriginPosition(CircleShape Shape, Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
+        {
+            Vector2f origin;
+            origin.X = (h_align == Origin_Horizontal_Alignment.CENTER) ? Shape.Radius : (h_align == Origin_Horizontal_Alignment.RIGHT) ? (Shape.Radius * 2) : 0;
+            origin.Y = (v_align == Origin_Vertical_Alignment.CENTER) ? Shape.Radius : (v_align == Origin_Vertical_Alignment.BOTTOM) ? (Shape.Radius * 2) : 0;
+            return origin;
+        }
+        public static Vector2f GetOriginPosition(Sprite Shape, Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
+        {
+            Vector2f origin;
+            origin.X = (h_align == Origin_Horizontal_Alignment.CENTER) ? (Shape.Texture.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? Shape.Texture.Size.X : 0;
+            origin.Y = (v_align == Origin_Vertical_Alignment.CENTER) ? (Shape.Texture.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? Shape.Texture.Size.Y : 0;
+            return origin;
+        }
+        public static Vector2f GetOriginPosition(Text Shape, Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
+        {
+            Vector2f origin;
+            origin.X = (h_align == Origin_Horizontal_Alignment.CENTER) ? (Shape.GetGlobalBounds().Width * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? Shape.GetGlobalBounds().Width : 0;
+            origin.Y = (v_align == Origin_Vertical_Alignment.CENTER) ? (Shape.GetGlobalBounds().Height * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? Shape.GetGlobalBounds().Height : 0;
+            return origin;
+        }
     }
 }

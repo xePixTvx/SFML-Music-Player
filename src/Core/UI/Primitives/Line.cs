@@ -15,6 +15,10 @@ namespace Core.UI.Primitives
             Core.App.RenderSys.AddToRenderList(this);
         }
 
+        public override void Update()
+        {
+        }
+
         public override void Render()
         {
             if (IsVisible)

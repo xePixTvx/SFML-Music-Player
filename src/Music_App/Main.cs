@@ -38,9 +38,10 @@ namespace music_player_app.Music_App
 
             //FPS Text
             FPS_TEXT = new SimpleText("default", Text.Styles.Regular, 14, new Color(255, 255, 255, 255), "FPS: ");
-            FPS_TEXT.SetOrigin(Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment.TOP);
+            FPS_TEXT.Origin_H_Align = Origin_Horizontal_Alignment.LEFT;
+            FPS_TEXT.Origin_V_Align = Origin_Vertical_Alignment.TOP;
             Vector2f fps_main_pos = Utils.GetPosition(Position_Horizontal_Alignment.LEFT, Position_Vertical_Alignment.TOP);
-            FPS_TEXT.SetPosition(fps_main_pos.X, fps_main_pos.Y);
+            FPS_TEXT.Position = new Vector2f(fps_main_pos.X, fps_main_pos.Y);
             FPS_TEXT.RenderLayer = 999;//Render Last
 
             //DEV Align/Positioning Cross Helper Thingy
@@ -68,7 +69,7 @@ namespace music_player_app.Music_App
         {
             if (Setting_showFps)
             {
-                FPS_TEXT.SetText("FPS: " + GetFPS() + " ------ " + GetFrameTime() + " MS");
+                FPS_TEXT.String = "FPS: " + GetFPS() + " ------ " + GetFrameTime() + " MS";
             }
         }
 

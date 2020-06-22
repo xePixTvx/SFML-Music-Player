@@ -12,6 +12,7 @@ namespace Core.UI
         private Origin_Vertical_Alignment _Origin_V_Align = Origin_Vertical_Alignment.TOP;
         private Vector2f _Position = new Vector2f(0, 0);
         private float _Rotation = 0;
+        private bool _NeedsUpdate = false;
 
         #region Render
         public virtual bool IsActive
@@ -46,40 +47,52 @@ namespace Core.UI
         public virtual Origin_Horizontal_Alignment Origin_H_Align
         {
             get { return _Origin_H_Align; }
-            set { _Origin_H_Align = value; }
+            set 
+            { 
+                _Origin_H_Align = value;
+                _NeedsUpdate = true;
+            }
         }
 
         public virtual Origin_Vertical_Alignment Origin_V_Align
         {
             get { return _Origin_V_Align; }
-            set { _Origin_V_Align = value; }
-        }
-
-        public virtual void SetOrigin(Origin_Horizontal_Alignment h_align = Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment v_align = Origin_Vertical_Alignment.TOP)
-        {
-            Core.App.Log.Print("SetOrigin() not defined for " + this, LoggerType.ERROR);
+            set 
+            { 
+                _Origin_V_Align = value;
+                _NeedsUpdate = true;
+            }
         }
 
         public virtual Vector2f Position
         {
             get { return _Position; }
-            set { _Position = value; }
-        }
-
-        public virtual void SetPosition(float x, float y)
-        {
-            Core.App.Log.Print("SetPosition() not defined for " + this, LoggerType.ERROR);
+            set
+            { 
+                _Position = value;
+                _NeedsUpdate = true;
+            }
         }
 
         public virtual float Rotation
         {
             get { return _Rotation; }
-            set { _Rotation = value; }
+            set 
+            {
+                _Rotation = value;
+                _NeedsUpdate = true;
+            }
         }
 
-        public virtual void SetRotation(float rotation)
+        public virtual bool NeedsUpdate
         {
-            Core.App.Log.Print("SetRotation() not defined for " + this, LoggerType.ERROR);
+            get { return _NeedsUpdate; }
+            set { _NeedsUpdate = value; }
+        }
+
+        public virtual void Update()
+        {
+            Core.App.Log.Print("Update() not defined for " + this, LoggerType.ERROR);
         }
         #endregion
     }

@@ -10,9 +10,6 @@ namespace Core
 {
     public abstract class App
     {
-        /*[DllImport("kernel32.dll")]
-        static extern bool FreeConsole();*/
-
         //Resource Folder
         public static string ResourceFolder { get; private set; }
         public static string FontFolder = "fonts";
@@ -38,9 +35,9 @@ namespace Core
 
         //Window
         public static RenderWindow Window { get; private set; }
-        public static VideoMode Window_size { get; private set; }
+        public static VideoMode WindowSize { get; private set; }
         public bool IsActive { get; private set; } = false;
-        private Color Window_background_color;
+        private Color WindowBackgroundColor;
 
         //Frame Time/Rate
         private Clock FrameTimeClock;
@@ -52,8 +49,8 @@ namespace Core
 
         //Default Assets
         private bool DefaultAssetLoadFailed = false;
-        public static Font default_font { get; private set; }
-        public static Texture default_texture { get; private set; }
+        public static Font DefaultFont { get; private set; }
+        public static Texture DefaultTexture { get; private set; }
 
         protected App(string _ConfigFileName, string window_title, string ResourceFolderName)
         {
@@ -69,8 +66,8 @@ namespace Core
             Setting_backupLogFiles = (Config.GetConfigSetting("MAIN", "backupLogFiles", "true") == "true") ? true : false;
 
             Log = new Logger(Setting_ShowLogInConsole, Setting_backupLogFiles);
-            Window_background_color = new Color(0, 0, 0);
-            Window_size = new VideoMode(Setting_window_width, Setting_window_height);
+            WindowBackgroundColor = new Color(0, 0, 0);
+            WindowSize = new VideoMode(Setting_window_width, Setting_window_height);
             InitWindow(window_title, Setting_window_style);
             AsManager = new AssetManager();
             if (!LoadDefaultAssets())
@@ -103,7 +100,7 @@ namespace Core
         private void InitWindow(string title, Styles style)
         {
             Log.Print("Init Window");
-            Window = new RenderWindow(Window_size, title, style);
+            Window = new RenderWindow(WindowSize, title, style);
             Window.SetVerticalSyncEnabled(false);
             Window.SetFramerateLimit(FrameRateLimit);
             InitWindowEventHandlers();
@@ -163,7 +160,7 @@ namespace Core
             while (IsActive)
             {
                 Window.DispatchEvents();
-                Window.Clear(Window_background_color);
+                Window.Clear(WindowBackgroundColor);
                 Update();
                 RenderSys.Render();
                 Window.Display();
@@ -196,7 +193,7 @@ namespace Core
             //Default Font
             try
             {
-                default_font = new Font(Path.Combine(ResourceFolder, FontFolder, "default.ttf"));
+                DefaultFont = new Font(Path.Combine(ResourceFolder, FontFolder, "default.ttf"));
                 Log.Print("Default Font Loaded");
             }
             catch (Exception e)
@@ -208,8 +205,8 @@ namespace Core
             //Default Texture
             try
             {
-                default_texture = new Texture(Path.Combine(ResourceFolder, TextureFolder, "default.png"));
-                default_texture.Repeated = true;
+                DefaultTexture = new Texture(Path.Combine(ResourceFolder, TextureFolder, "default.png"));
+                DefaultTexture.Repeated = true;
                 Log.Print("Default Texture Loaded");
             }
             catch (Exception e)

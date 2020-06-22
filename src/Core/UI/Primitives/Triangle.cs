@@ -1,11 +1,21 @@
 ﻿using SFML.Graphics;
-using SFML.System;
 
 namespace Core.UI.Primitives
 {
     class Triangle : RenderableBase
     {
         private CircleShape Shape;
+        private float _Radius;
+
+        public float Radius
+        {
+            get { return _Radius; }
+            set
+            {
+                _Radius = value;
+                NeedsUpdate = true;
+            }
+        }
 
         public Triangle(float size, float rotation, Color RGBA)
         {
@@ -17,31 +27,24 @@ namespace Core.UI.Primitives
             Core.App.RenderSys.AddToRenderList(this);
         }
 
-        public override void SetOrigin(Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
+        public override void Update()
         {
-            Origin_H_Align = h_align;
-            Origin_V_Align = v_align;
-            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? Shape.Radius : (h_align == Origin_Horizontal_Alignment.RIGHT) ? (Shape.Radius * 2) : 0;
-            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? Shape.Radius : (v_align == Origin_Vertical_Alignment.BOTTOM) ? (Shape.Radius * 2) : 0;
-            Shape.Origin = new Vector2f(origin_h, origin_v);
-        }
+            if (NeedsUpdate)
+            {
+                //Update Size
+                Shape.Radius = Radius;
 
-        public override void SetPosition(float x, float y)
-        {
-            Position = new Vector2f(x, y);
-            Shape.Position = Position;
-        }
+                //Update Origin
+                Shape.Origin = Utils.GetOriginPosition(Shape, Origin_H_Align, Origin_V_Align);
 
-        public override void SetRotation(float rotation)
-        {
-            Shape.Rotation = rotation;
-        }
+                //Update Position
+                Shape.Position = Position;
 
-        public void SetSize(float radius)
-        {
-            Shape.Radius = radius;
-            SetOrigin(Origin_H_Align, Origin_V_Align);
-            SetPosition(Position.X, Position.Y);
+                //Update Rotation
+                Shape.Rotation = Rotation;
+
+                NeedsUpdate = false;
+            }
         }
 
         public override void Render()

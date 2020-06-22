@@ -21,7 +21,7 @@ namespace Core.AssetTypes
             {
                 Core.App.Log.Print("Failed to load Font: " + file, LoggerType.ASSET);
                 Core.App.Log.Print(e.ToString(), LoggerType.ASSET);
-                Font = Core.App.default_font;
+                Font = Core.App.DefaultFont;
             }
         }
     }

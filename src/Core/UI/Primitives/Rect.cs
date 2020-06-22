@@ -1,5 +1,4 @@
-﻿using Core.UI.Interfaces;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
 
 namespace Core.UI.Primitives
@@ -7,42 +6,46 @@ namespace Core.UI.Primitives
     class Rect : RenderableBase
     {
         private RectangleShape Shape;
+        private Vector2f _Size;
+
+        public Vector2f Size
+        {
+            get { return _Size; }
+            set 
+            { 
+                _Size = value;
+                NeedsUpdate = true;
+            }
+        }
 
         public Rect(float width, float height, Color RGBA)
         {
             Shape = new RectangleShape
             {
-                Size = new Vector2f(width, height),
-                FillColor = RGBA,
+                FillColor = RGBA
             };
+            Size = new Vector2f(width, height);
             Core.App.RenderSys.AddToRenderList(this);
         }
 
-        public override void SetOrigin(Origin_Horizontal_Alignment h_align, Origin_Vertical_Alignment v_align)
+        public override void Update()
         {
-            Origin_H_Align = h_align;
-            Origin_V_Align = v_align;
-            float origin_h = (h_align == Origin_Horizontal_Alignment.CENTER) ? (Shape.Size.X * (float)0.5) : (h_align == Origin_Horizontal_Alignment.RIGHT) ? Shape.Size.X : 0;
-            float origin_v = (v_align == Origin_Vertical_Alignment.CENTER) ? (Shape.Size.Y * (float)0.5) : (v_align == Origin_Vertical_Alignment.BOTTOM) ? Shape.Size.Y : 0;
-            Shape.Origin = new Vector2f(origin_h, origin_v);
-        }
+            if (NeedsUpdate)
+            {
+                //Update Size
+                Shape.Size = Size;
 
-        public override void SetPosition(float x, float y)
-        {
-            Position = new Vector2f(x, y);
-            Shape.Position = Position;
-        }
+                //Update Origin
+                Shape.Origin = Utils.GetOriginPosition(Shape, Origin_H_Align, Origin_V_Align);
 
-        public override void SetRotation(float rotation)
-        {
-            Shape.Rotation = rotation;
-        }
+                //Update Position
+                Shape.Position = Position;
 
-        public void SetSize(float width, float height)
-        {
-            Shape.Size = new Vector2f(width, height);
-            SetOrigin(Origin_H_Align, Origin_V_Align);
-            SetPosition(Position.X, Position.Y);
+                //Update Rotation
+                Shape.Rotation = Rotation;
+
+                NeedsUpdate = false;
+            }
         }
 
         public override void Render()

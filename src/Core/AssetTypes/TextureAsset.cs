@@ -21,7 +21,7 @@ namespace Core.AssetTypes
             {
                 Core.App.Log.Print("Failed to load Texture: " + file, LoggerType.ASSET);
                 Core.App.Log.Print(e.ToString(), LoggerType.ASSET);
-                Texture = Core.App.default_texture;
+                Texture = Core.App.DefaultTexture;
             }
         }
     }

@@ -42,10 +42,16 @@ namespace Core
             {
                 if(elem.IsActive)
                 {
-                    if(elem is IClickable clickElem)
+                    // Update Elem Origin,Position....
+                    elem.Update();
+
+                    // Update Elem IsSelected Bool
+                    if (elem is IClickable clickElem)
                     {
                         clickElem.UpdateSelection();
                     }
+
+                    // Render Elem
                     elem.Render();
                 }
             }

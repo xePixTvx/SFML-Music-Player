@@ -41,7 +41,7 @@ namespace Core
         {
             if(name == "default")
             {
-                return Core.App.default_font;
+                return Core.App.DefaultFont;
             }
             foreach(FontAsset _font in FontList)
             {
@@ -50,14 +50,14 @@ namespace Core
                     return _font.Font;
                 }
             }
-            return Core.App.default_font;
+            return Core.App.DefaultFont;
         }
 
         public Texture GetTexture(string name)
         {
             if (name == "default")
             {
-                return Core.App.default_texture;
+                return Core.App.DefaultTexture;
             }
             foreach (TextureAsset _texture in TextureList)
             {
@@ -66,7 +66,7 @@ namespace Core
                     return _texture.Texture;
                 }
             }
-            return Core.App.default_texture;
+            return Core.App.DefaultTexture;
         }
     }
 }
