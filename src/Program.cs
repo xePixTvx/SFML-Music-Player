@@ -1,6 +1,6 @@
 ﻿/*
  *CURRENTLY WORKING ON:
- *                      Core.UI.Controls
+ *                      Core.UI.Controls.ProgressBar
  */
 namespace music_player_app
 {

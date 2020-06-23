@@ -1,8 +1,12 @@
 ﻿using System;
 using System.IO;
 using SFML.Window;
+using SFML.Graphics;
 using Core;
+using Core.UI;
+using Core.UI.Controls;
 using music_player_app.Music_App.SoundPlayer;
+using SFML.System;
 
 namespace music_player_app.Music_App
 {
@@ -13,6 +17,8 @@ namespace music_player_app.Music_App
 
         public static AudioPlayer Audio_Player;
         private MainUI Player_UI;
+
+        private ProgressBar TestBar;
 
         public Main(string ConfigFileName, string WindowTitle, string ResourceFolderName) : base(ConfigFileName, WindowTitle, ResourceFolderName)
         {
@@ -38,6 +44,13 @@ namespace music_player_app.Music_App
             Audio_Player.LoadAudio(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));//Testing
 
             Player_UI = new MainUI();
+
+
+            TestBar = new ProgressBar(400, 50, new Color(255, 0, 0, 255), new Color(0, 0, 255, 255));
+            TestBar.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
+            TestBar.Origin_V_Align = Origin_Vertical_Alignment.CENTER;
+            Vector2f testbar_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.CENTER);
+            TestBar.Position = testbar_pos;
         }
 
 
