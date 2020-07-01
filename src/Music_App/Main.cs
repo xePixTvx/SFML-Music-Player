@@ -18,9 +18,7 @@ namespace music_player_app.Music_App
 
 
         private SimpleSprite MainBg;
-
         public static AudioPlayer Audio_Player;
-        private MainUI Player_UI;
 
         public Main(string ConfigFileName, string WindowTitle, string ResourceFolderName) : base(ConfigFileName, WindowTitle, ResourceFolderName)
         {
@@ -55,18 +53,18 @@ namespace music_player_app.Music_App
             //Audio Player
             Audio_Player = new AudioPlayer();
             Audio_Player.LoadAudio(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));//Testing
-
-            //Audio Player UI
-            Player_UI = new MainUI();
         }
 
 
         protected override void Update()
         {
+            Audio_Player.Update();
         }
 
         protected override void OnAppClosing()
         {
+            //Fixes the OpenAL "AL lib: (EE) alc_cleanup: 1 device not closed" Console Msg ---------- Disposing ends with a "Access violation" error -------- FIX THIS
+            //Audio_Player.DisposeAudioPlayer();
         }
 
 

@@ -11,7 +11,7 @@ namespace Core.UI.Controls
     {
         private RectangleShape BG_Shape;
         private RectangleShape Fill_Shape;
-        private int _Value;
+        private float _Value;
         private Vector2f _Size;
         private ProgressBarStyles _Style;
 
@@ -25,7 +25,7 @@ namespace Core.UI.Controls
             }
         }
 
-        public int Value
+        public float Value
         {
             get { return _Value; }
             set

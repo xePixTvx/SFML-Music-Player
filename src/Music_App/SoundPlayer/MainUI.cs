@@ -2,7 +2,9 @@
 using Core.UI.Controls;
 using SFML.System;
 using SFML.Graphics;
+using SFML.Audio;
 using Core.UI.Primitives;
+using System;
 
 namespace music_player_app.Music_App.SoundPlayer
 {
@@ -60,44 +62,60 @@ namespace music_player_app.Music_App.SoundPlayer
             VOLUME_MENU_OPEN_BUTTON.RenderLayer = 0;
 
             //Time Line
-            TimeLine = new ProgressBar(600, 15, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), ProgressBarStyles.HORIZONTAL, 10);
+            TimeLine = new ProgressBar(600, 15, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), ProgressBarStyles.HORIZONTAL);
             Vector2f timeline_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM);
             TimeLine.Position = new Vector2f(timeline_pos.X, timeline_pos.Y - 120);
             TimeLine.RenderLayer = 0;
 
             //Time Text
-            TimeText = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "1:25");
+            TimeText = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "0:0");
             TimeText.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
             TimeText.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
             TimeText.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 80);
             TimeText.RenderLayer = 0;
 
             //Song Name
-            SongName = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "TEST NAME - More Test Stuff");
+            SongName = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "-");
             SongName.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
             SongName.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
             SongName.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 140);
             SongName.RenderLayer = 0;
         }
 
+        public void UpdateSongName(string name)
+        {
+            SongName.String = name;
+        }
 
+        public void UpdatePlayingTime(Sound sound)
+        {
+            float duration_ms = sound.SoundBuffer.Duration.AsMilliseconds();
+            int minutes = (int)sound.PlayingOffset.AsSeconds() / 60;
+            int seconds = (int)sound.PlayingOffset.AsSeconds();
+            float millisec = sound.PlayingOffset.AsMilliseconds();
+
+            //Update Time Text
+            TimeText.String = minutes + ":" + (seconds - (60 * minutes));
+
+            //Update Time Line
+            TimeLine.Value = millisec / (duration_ms / 100);
+        }
 
 
         #region Button Actions
-
         //Toggle Play/Pause Action
         private void Action_PlayPause()
         {
             AudioPlayer audio = Main.Audio_Player;
-            if (audio.GetPlayingStatus() == AudioPlayer.PlayingStatus.PAUSE || audio.GetPlayingStatus() == AudioPlayer.PlayingStatus.STOP)
+            if (audio.sf_sound.Status == SoundStatus.Paused || audio.sf_sound.Status == SoundStatus.Stopped)
             {
                 PLAY_PAUSE_BUTTON.Texture_Name = "button_pause";
-                audio.SetPlayingStatus(AudioPlayer.PlayingStatus.PLAY);
+                audio.sf_sound.Play();
             }
-            else if (audio.GetPlayingStatus() == AudioPlayer.PlayingStatus.PLAY)
+            else if (audio.sf_sound.Status == SoundStatus.Playing)
             {
                 PLAY_PAUSE_BUTTON.Texture_Name = "button_play";
-                audio.SetPlayingStatus(AudioPlayer.PlayingStatus.PAUSE);
+                audio.sf_sound.Pause();
             }
         }
 
@@ -106,14 +124,12 @@ namespace music_player_app.Music_App.SoundPlayer
         private void Action_Stop()
         {
             AudioPlayer audio = Main.Audio_Player;
-            if (audio.GetPlayingStatus() == AudioPlayer.PlayingStatus.PLAY)
+            if (audio.sf_sound.Status == SoundStatus.Playing)
             {
-                audio.SetPlayingStatus(AudioPlayer.PlayingStatus.STOP);
+                audio.sf_sound.Stop();
                 PLAY_PAUSE_BUTTON.Texture_Name = "button_play";
             }
         }
-
-
         #endregion Button Actions
 
 
