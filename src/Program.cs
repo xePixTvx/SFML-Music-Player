@@ -1,6 +1,14 @@
 ﻿/*
  *CURRENTLY WORKING ON:
  *                      Core.UI.Controls.ProgressBar
+ *                      
+ *                      
+ *                      
+ *                      
+ *                      
+ *                      
+ *                      Sans Culottes Font: http://www.myfont.de/fonts/infos/4908-Sans-Culottes.html
+ *                      Main Background Image: https://www.pixiv.net/en/users/3468048
  */
 namespace music_player_app
 {

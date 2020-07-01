@@ -67,8 +67,8 @@ namespace Core
             //Config/Setting Stuff
             Config = new ConfigFile(_ConfigFileName);
             Setting_ShowLogInConsole = (Config.GetConfigSetting("MAIN", "ShowLogInConsole", "false") == "true") ? true : false;
-            Setting_window_width = Convert.ToUInt32(Config.GetConfigSetting("MAIN", "window_width", "800"));//lock it???
-            Setting_window_height = Convert.ToUInt32(Config.GetConfigSetting("MAIN", "window_height", "600"));//lock it???
+            Setting_window_width = Convert.ToUInt32(Config.GetConfigSetting("MAIN", "window_width", "1200"));//lock it???
+            Setting_window_height = Convert.ToUInt32(Config.GetConfigSetting("MAIN", "window_height", "553"));//lock it???
             Setting_showFps = (Config.GetConfigSetting("MAIN", "showFps", "false") == "true") ? true : false;
             Setting_window_style = Styles.Close;
             Setting_backupLogFiles = (Config.GetConfigSetting("MAIN", "backupLogFiles", "true") == "true") ? true : false;

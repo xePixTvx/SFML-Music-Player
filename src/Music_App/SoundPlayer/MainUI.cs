@@ -1,6 +1,8 @@
 ﻿using Core.UI;
 using Core.UI.Controls;
 using SFML.System;
+using SFML.Graphics;
+using Core.UI.Primitives;
 
 namespace music_player_app.Music_App.SoundPlayer
 {
@@ -12,6 +14,10 @@ namespace music_player_app.Music_App.SoundPlayer
         private SpriteButton PREV_SONG_BUTTON;
 
         private SpriteButton VOLUME_MENU_OPEN_BUTTON;
+
+        private ProgressBar TimeLine;
+        private SimpleText TimeText;
+        private SimpleText SongName;
 
         public MainUI()
         {
@@ -52,6 +58,26 @@ namespace music_player_app.Music_App.SoundPlayer
             VOLUME_MENU_OPEN_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
             VOLUME_MENU_OPEN_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 15);
             VOLUME_MENU_OPEN_BUTTON.RenderLayer = 0;
+
+            //Time Line
+            TimeLine = new ProgressBar(600, 15, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), ProgressBarStyles.HORIZONTAL, 10);
+            Vector2f timeline_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM);
+            TimeLine.Position = new Vector2f(timeline_pos.X, timeline_pos.Y - 120);
+            TimeLine.RenderLayer = 0;
+
+            //Time Text
+            TimeText = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "1:25");
+            TimeText.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
+            TimeText.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            TimeText.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 80);
+            TimeText.RenderLayer = 0;
+
+            //Song Name
+            SongName = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "TEST NAME - More Test Stuff");
+            SongName.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
+            SongName.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            SongName.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 140);
+            SongName.RenderLayer = 0;
         }
 
 

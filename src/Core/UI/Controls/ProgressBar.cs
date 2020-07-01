@@ -1,5 +1,9 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using System;
+
+
+//Works but i dont like it so i still consider it UNFINISHED
 
 namespace Core.UI.Controls
 {
@@ -8,8 +12,8 @@ namespace Core.UI.Controls
         private RectangleShape BG_Shape;
         private RectangleShape Fill_Shape;
         private int _Value;
-
         private Vector2f _Size;
+        private ProgressBarStyles _Style;
 
         public Vector2f Size
         {
@@ -26,12 +30,22 @@ namespace Core.UI.Controls
             get { return _Value; }
             set
             {
-                _Value = value;
+                _Value = (value > 100) ? 100 : (value < 0) ? 0 : value;
                 NeedsUpdate = true;
             }
         }
 
-        public ProgressBar(float width, float height, Color BG_RGBA, Color Fill_RGBA, int value = 0)
+        public ProgressBarStyles Style
+        {
+            get { return _Style; }
+            private set
+            {
+                _Style = value;
+                NeedsUpdate = true;
+            }
+        }
+
+        public ProgressBar(float width, float height, Color BG_RGBA, Color Fill_RGBA, ProgressBarStyles ProgressbarStyle = ProgressBarStyles.HORIZONTAL, int value = 0)
         {
             BG_Shape = new RectangleShape
             {
@@ -41,6 +55,7 @@ namespace Core.UI.Controls
             {
                 FillColor = Fill_RGBA
             };
+            Style = ProgressbarStyle;
             Size = new Vector2f(width, height);
             Value = value;
             Core.App.RenderSys.AddToRenderList(this);
@@ -50,17 +65,40 @@ namespace Core.UI.Controls
         {
             if (NeedsUpdate)
             {
-                //Update Size
+                //Update BG Size
                 BG_Shape.Size = Size;
-                Fill_Shape.Size = new Vector2f(Size.X - 50, Size.Y);
 
-                //Update Origin
-                BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Origin_H_Align, Origin_V_Align);
-                Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Origin_Horizontal_Alignment.LEFT, Origin_V_Align);
+                //Update Fill Size depending on Value
+                if (Style == ProgressBarStyles.HORIZONTAL)
+                {
+                    float fill_size_x = (Size.X / 100) * Value;
+                    Fill_Shape.Size = new Vector2f(fill_size_x, Size.Y);
 
-                //Update Position
-                BG_Shape.Position = Position;
-                Fill_Shape.Position = new Vector2f(BG_Shape.Origin.X, Position.Y);
+                    //Update Origin
+                    BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.CENTER);
+                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment.CENTER);
+
+                    //Update Position
+                    BG_Shape.Position = Position;
+                    Fill_Shape.Position = new Vector2f(BG_Shape.Origin.X, Position.Y);
+                }
+                else if(Style == ProgressBarStyles.VERTICAL)
+                {
+                    float fill_size_y = (Size.Y / 100) * Value;
+                    Fill_Shape.Size = new Vector2f(Size.X, fill_size_y);
+
+                    //Update Origin
+                    BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
+                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment.BOTTOM);
+
+                    //Update Position
+                    BG_Shape.Position = Position;
+                    Fill_Shape.Position = new Vector2f(BG_Shape.Origin.X, BG_Shape.Position.Y);
+                }
+                else
+                {
+                    Style = ProgressBarStyles.HORIZONTAL;
+                }
 
                 //Update Rotation
                 BG_Shape.Rotation = Rotation;

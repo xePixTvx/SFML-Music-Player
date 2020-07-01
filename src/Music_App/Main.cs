@@ -7,22 +7,25 @@ using Core.UI;
 using Core.UI.Controls;
 using music_player_app.Music_App.SoundPlayer;
 using SFML.System;
+using Core.UI.Primitives;
 
 namespace music_player_app.Music_App
 {
     class Main : App
     {
-        private bool ShowDevCross = true;
+        private bool ShowDevCross = false;
         private Core.Debug.DebugCross DevCross;
+
+
+        private SimpleSprite MainBg;
 
         public static AudioPlayer Audio_Player;
         private MainUI Player_UI;
 
-        private ProgressBar TestBar;
-
         public Main(string ConfigFileName, string WindowTitle, string ResourceFolderName) : base(ConfigFileName, WindowTitle, ResourceFolderName)
         {
-            //Load Assets
+            #region Load Assets
+            //Textures
             AsManager.Load(AssetManager.AssetType.Texture, "MAIN_BACKGROUND.jpg", "main_bg");
             AsManager.Load(AssetManager.AssetType.Texture, "texture_button_play.png", "button_play");
             AsManager.Load(AssetManager.AssetType.Texture, "texture_button_pause.png", "button_pause");
@@ -33,6 +36,11 @@ namespace music_player_app.Music_App
             AsManager.Load(AssetManager.AssetType.Texture, "texture_minus.png", "minus");
             AsManager.Load(AssetManager.AssetType.Texture, "texture_plus.png", "plus");
 
+            //Fonts
+            AsManager.Load(AssetManager.AssetType.Font, "Sans_Culottes_By_K-Type.ttf", "sansC");
+            #endregion Load Assets
+
+
             //DEV Align/Positioning Cross Helper Thingy
             if (ShowDevCross)
             {
@@ -40,17 +48,16 @@ namespace music_player_app.Music_App
             }
 
 
+
+            //Main Background
+            MainBg = new SimpleSprite("main_bg");
+
+            //Audio Player
             Audio_Player = new AudioPlayer();
             Audio_Player.LoadAudio(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));//Testing
 
+            //Audio Player UI
             Player_UI = new MainUI();
-
-
-            TestBar = new ProgressBar(400, 50, new Color(255, 0, 0, 255), new Color(0, 0, 255, 255));
-            TestBar.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
-            TestBar.Origin_V_Align = Origin_Vertical_Alignment.CENTER;
-            Vector2f testbar_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.CENTER);
-            TestBar.Position = testbar_pos;
         }
 
 
