@@ -15,17 +15,37 @@ namespace music_player_app.Music_App.SoundPlayer
         private SpriteButton NEXT_SONG_BUTTON;
         private SpriteButton PREV_SONG_BUTTON;
 
-        private SpriteButton VOLUME_MENU_OPEN_BUTTON;
-
         private ProgressBar TimeLine;
         private SimpleText TimeText;
         private SimpleText SongName;
 
-        public MainUI()
+        private bool _VolumeMenuOpened;
+        private float CurrentVolume;
+        private SpriteButton VOLUME_MENU_OPEN_BUTTON;
+        private SpriteButton VOLUME_MENU_MINUS_BUTTON;
+        private SpriteButton VOLUME_MENU_PLUS_BUTTON;
+        private ProgressBar VOLUME_MENU_PROGRESS;
+        private SimpleText VOLUME_MENU_PROGRESS_TEXT;
+
+
+        public bool VolumeMenuOpened
+        {
+            get { return _VolumeMenuOpened; }
+            set 
+            {
+                _VolumeMenuOpened = value;
+                UpdateVolumeMenuVisibility();
+            }
+        }
+
+
+
+        public MainUI(float currentVolume)
         {
             Vector2f Buttons_CenterBottomPos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM);
             Vector2f Buttons_RightBottomPos = Utils.GetPosition(Position_Horizontal_Alignment.RIGHT, Position_Vertical_Alignment.BOTTOM);
 
+            #region Main UI Elems
             //Play/Pause Button
             PLAY_PAUSE_BUTTON = new SpriteButton("button_play", Action_PlayPause);
             PLAY_PAUSE_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.LEFT;
@@ -54,13 +74,6 @@ namespace music_player_app.Music_App.SoundPlayer
             PREV_SONG_BUTTON.Position = new Vector2f(Buttons_CenterBottomPos.X - 100, Buttons_CenterBottomPos.Y - 15);
             PREV_SONG_BUTTON.RenderLayer = 0;
 
-            //Volume Menu Button
-            VOLUME_MENU_OPEN_BUTTON = new SpriteButton("button_volume");//open a little popup volume slider
-            VOLUME_MENU_OPEN_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
-            VOLUME_MENU_OPEN_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
-            VOLUME_MENU_OPEN_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 15);
-            VOLUME_MENU_OPEN_BUTTON.RenderLayer = 0;
-
             //Time Line
             TimeLine = new ProgressBar(600, 15, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), ProgressBarStyles.HORIZONTAL);
             Vector2f timeline_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM);
@@ -68,7 +81,7 @@ namespace music_player_app.Music_App.SoundPlayer
             TimeLine.RenderLayer = 0;
 
             //Time Text
-            TimeText = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "0:0");
+            TimeText = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "0:00");
             TimeText.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
             TimeText.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
             TimeText.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 80);
@@ -80,6 +93,47 @@ namespace music_player_app.Music_App.SoundPlayer
             SongName.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
             SongName.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 140);
             SongName.RenderLayer = 0;
+            #endregion Main UI Elems
+
+            #region Volume Menu
+            CurrentVolume = currentVolume;
+
+            //Volume Menu Button
+            VOLUME_MENU_OPEN_BUTTON = new SpriteButton("button_volume",Action_ToggleVolumeMenu);
+            VOLUME_MENU_OPEN_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
+            VOLUME_MENU_OPEN_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_OPEN_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 15);
+            VOLUME_MENU_OPEN_BUTTON.RenderLayer = 0;
+
+            //Volume Minus Button
+            VOLUME_MENU_MINUS_BUTTON = new SpriteButton("minus",Action_DecreaseVolume);
+            VOLUME_MENU_MINUS_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
+            VOLUME_MENU_MINUS_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_MINUS_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 70);
+            VOLUME_MENU_MINUS_BUTTON.RenderLayer = 0;
+
+            //Volume Plus Button
+            VOLUME_MENU_PLUS_BUTTON = new SpriteButton("plus",Action_IncreaseVolume);
+            VOLUME_MENU_PLUS_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
+            VOLUME_MENU_PLUS_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_PLUS_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 320);
+            VOLUME_MENU_PLUS_BUTTON.RenderLayer = 0;
+
+            //Volume Progressbar
+            VOLUME_MENU_PROGRESS = new ProgressBar(15, 200, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), ProgressBarStyles.VERTICAL, CurrentVolume);
+            Vector2f volProgress_pos = Utils.GetPosition(Position_Horizontal_Alignment.RIGHT, Position_Vertical_Alignment.BOTTOM);
+            VOLUME_MENU_PROGRESS.Position = new Vector2f(volProgress_pos.X - 39, volProgress_pos.Y - 103);
+            VOLUME_MENU_PROGRESS.RenderLayer = 0;
+
+            //Volume Progress Text
+            VOLUME_MENU_PROGRESS_TEXT = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), Convert.ToInt32(CurrentVolume) + "%");
+            VOLUME_MENU_PROGRESS_TEXT.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
+            VOLUME_MENU_PROGRESS_TEXT.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_PROGRESS_TEXT.Position = new Vector2f(Buttons_RightBottomPos.X - 35, Buttons_RightBottomPos.Y - 307);
+            VOLUME_MENU_PROGRESS_TEXT.RenderLayer = 0;
+
+            VolumeMenuOpened = false;
+            #endregion Volume Menu
         }
 
         public void UpdateSongName(string name)
@@ -95,10 +149,27 @@ namespace music_player_app.Music_App.SoundPlayer
             float millisec = sound.PlayingOffset.AsMilliseconds();
 
             //Update Time Text
-            TimeText.String = minutes + ":" + (seconds - (60 * minutes));
+            TimeText.String = ((seconds - (60 * minutes)) < 10) ? (minutes + ":0" + (seconds - (60 * minutes))) : (minutes + ":" + (seconds - (60 * minutes)));
 
             //Update Time Line
             TimeLine.Value = millisec / (duration_ms / 100);
+        }
+
+        private void UpdateVolumeMenuVisibility()
+        {
+            VOLUME_MENU_MINUS_BUTTON.IsActive = VolumeMenuOpened;
+            VOLUME_MENU_PLUS_BUTTON.IsActive = VolumeMenuOpened;
+            VOLUME_MENU_PROGRESS.IsActive = VolumeMenuOpened;
+            VOLUME_MENU_PROGRESS_TEXT.IsActive = VolumeMenuOpened;
+        }
+
+        private void UpdateVolume()
+        {
+            CurrentVolume = (CurrentVolume > 100) ? 100 : (CurrentVolume < 0) ? 0 : CurrentVolume;
+            AudioPlayer audio = Main.Audio_Player;
+            audio.sf_sound.Volume = CurrentVolume;
+            VOLUME_MENU_PROGRESS.Value = CurrentVolume;
+            VOLUME_MENU_PROGRESS_TEXT.String = Convert.ToInt32(CurrentVolume) + "%";
         }
 
 
@@ -119,7 +190,6 @@ namespace music_player_app.Music_App.SoundPlayer
             }
         }
 
-
         //Stop Song Action
         private void Action_Stop()
         {
@@ -128,7 +198,26 @@ namespace music_player_app.Music_App.SoundPlayer
             {
                 audio.sf_sound.Stop();
                 PLAY_PAUSE_BUTTON.Texture_Name = "button_play";
+                UpdatePlayingTime(audio.sf_sound);
             }
+        }
+
+        //Show/Hide Volume Menu
+        private void Action_ToggleVolumeMenu()
+        {
+            VolumeMenuOpened = (!VolumeMenuOpened) ? true : false;
+        }
+
+        //Increase/Decrease Volume
+        private void Action_IncreaseVolume()
+        {
+            CurrentVolume += 5;
+            UpdateVolume();
+        }
+        private void Action_DecreaseVolume()
+        {
+            CurrentVolume -= 5;
+            UpdateVolume();
         }
         #endregion Button Actions
 

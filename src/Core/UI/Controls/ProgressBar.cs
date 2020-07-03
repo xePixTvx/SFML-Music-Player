@@ -45,7 +45,7 @@ namespace Core.UI.Controls
             }
         }
 
-        public ProgressBar(float width, float height, Color BG_RGBA, Color Fill_RGBA, ProgressBarStyles ProgressbarStyle = ProgressBarStyles.HORIZONTAL, int value = 0)
+        public ProgressBar(float width, float height, Color BG_RGBA, Color Fill_RGBA, ProgressBarStyles ProgressbarStyle = ProgressBarStyles.HORIZONTAL, float value = 0)
         {
             BG_Shape = new RectangleShape
             {
@@ -89,11 +89,11 @@ namespace Core.UI.Controls
 
                     //Update Origin
                     BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
-                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment.BOTTOM);
+                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
 
                     //Update Position
                     BG_Shape.Position = Position;
-                    Fill_Shape.Position = new Vector2f(BG_Shape.Origin.X, BG_Shape.Position.Y);
+                    Fill_Shape.Position = new Vector2f(BG_Shape.Position.X, BG_Shape.Position.Y);
                 }
                 else
                 {

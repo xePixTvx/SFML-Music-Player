@@ -13,7 +13,9 @@ namespace music_player_app.Music_App.SoundPlayer
         public AudioPlayer()
         {
             sf_sound = new Sound();
-            UI = new MainUI();
+            sf_sound.Volume = 30;
+
+            UI = new MainUI(sf_sound.Volume);
         }
 
         public void DisposeAudioPlayer()
