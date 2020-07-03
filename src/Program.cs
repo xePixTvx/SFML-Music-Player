@@ -1,6 +1,5 @@
 ﻿/*
  *CURRENTLY WORKING ON:
- *                      Core.UI.Controls.ProgressBar
  *                      
  *                      
  *                      

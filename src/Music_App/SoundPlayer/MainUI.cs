@@ -10,23 +10,12 @@ namespace music_player_app.Music_App.SoundPlayer
 {
     class MainUI
     {
-        private SpriteButton PLAY_PAUSE_BUTTON;
-        private SpriteButton STOP_BUTTON;
-        private SpriteButton NEXT_SONG_BUTTON;
-        private SpriteButton PREV_SONG_BUTTON;
-
-        private ProgressBar TimeLine;
-        private SimpleText TimeText;
-        private SimpleText SongName;
-
+        private Sound Sound;
+        private SpriteButton PLAY_PAUSE_BUTTON, STOP_BUTTON, NEXT_SONG_BUTTON, PREV_SONG_BUTTON, VOLUME_MENU_OPEN_BUTTON, VOLUME_MENU_MINUS_BUTTON, VOLUME_MENU_PLUS_BUTTON;
+        private ProgressBar TimeLine, VOLUME_MENU_PROGRESS;
+        private SimpleText TimeText, SongName, VOLUME_MENU_PROGRESS_TEXT;
         private bool _VolumeMenuOpened;
         private float CurrentVolume;
-        private SpriteButton VOLUME_MENU_OPEN_BUTTON;
-        private SpriteButton VOLUME_MENU_MINUS_BUTTON;
-        private SpriteButton VOLUME_MENU_PLUS_BUTTON;
-        private ProgressBar VOLUME_MENU_PROGRESS;
-        private SimpleText VOLUME_MENU_PROGRESS_TEXT;
-
 
         public bool VolumeMenuOpened
         {
@@ -38,10 +27,11 @@ namespace music_player_app.Music_App.SoundPlayer
             }
         }
 
-
-
-        public MainUI(float currentVolume)
+        public MainUI(Sound sound, float currentVolume)
         {
+            Sound = sound;
+            CurrentVolume = currentVolume;
+
             Vector2f Buttons_CenterBottomPos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM);
             Vector2f Buttons_RightBottomPos = Utils.GetPosition(Position_Horizontal_Alignment.RIGHT, Position_Vertical_Alignment.BOTTOM);
 
@@ -96,8 +86,6 @@ namespace music_player_app.Music_App.SoundPlayer
             #endregion Main UI Elems
 
             #region Volume Menu
-            CurrentVolume = currentVolume;
-
             //Volume Menu Button
             VOLUME_MENU_OPEN_BUTTON = new SpriteButton("button_volume",Action_ToggleVolumeMenu);
             VOLUME_MENU_OPEN_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
@@ -166,39 +154,35 @@ namespace music_player_app.Music_App.SoundPlayer
         private void UpdateVolume()
         {
             CurrentVolume = (CurrentVolume > 100) ? 100 : (CurrentVolume < 0) ? 0 : CurrentVolume;
-            AudioPlayer audio = Main.Audio_Player;
-            audio.sf_sound.Volume = CurrentVolume;
+            Sound.Volume = CurrentVolume;
             VOLUME_MENU_PROGRESS.Value = CurrentVolume;
             VOLUME_MENU_PROGRESS_TEXT.String = Convert.ToInt32(CurrentVolume) + "%";
         }
-
 
         #region Button Actions
         //Toggle Play/Pause Action
         private void Action_PlayPause()
         {
-            AudioPlayer audio = Main.Audio_Player;
-            if (audio.sf_sound.Status == SoundStatus.Paused || audio.sf_sound.Status == SoundStatus.Stopped)
+            if (Sound.Status == SoundStatus.Paused || Sound.Status == SoundStatus.Stopped)
             {
                 PLAY_PAUSE_BUTTON.Texture_Name = "button_pause";
-                audio.sf_sound.Play();
+                Sound.Play();
             }
-            else if (audio.sf_sound.Status == SoundStatus.Playing)
+            else if (Sound.Status == SoundStatus.Playing)
             {
                 PLAY_PAUSE_BUTTON.Texture_Name = "button_play";
-                audio.sf_sound.Pause();
+                Sound.Pause();
             }
         }
 
         //Stop Song Action
         private void Action_Stop()
         {
-            AudioPlayer audio = Main.Audio_Player;
-            if (audio.sf_sound.Status == SoundStatus.Playing)
+            if (Sound.Status == SoundStatus.Playing)
             {
-                audio.sf_sound.Stop();
+                Sound.Stop();
                 PLAY_PAUSE_BUTTON.Texture_Name = "button_play";
-                UpdatePlayingTime(audio.sf_sound);
+                UpdatePlayingTime(Sound);
             }
         }
 
@@ -220,9 +204,5 @@ namespace music_player_app.Music_App.SoundPlayer
             UpdateVolume();
         }
         #endregion Button Actions
-
-
-
-
     }
 }

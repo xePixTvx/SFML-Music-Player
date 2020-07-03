@@ -1,9 +1,8 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using System;
 
 
-//Works but i dont like it so i still consider it UNFINISHED
+//Works but i dont like it so i should recode it xD
 
 namespace Core.UI.Controls
 {

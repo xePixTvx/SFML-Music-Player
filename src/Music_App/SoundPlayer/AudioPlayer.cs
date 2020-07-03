@@ -4,7 +4,10 @@ namespace music_player_app.Music_App.SoundPlayer
 {
     class AudioPlayer
     {
+        //SFML Sound
         public Sound sf_sound;
+
+        //SFML SoundBuffer
         private SoundBuffer sf_buffer;
 
         //UI
@@ -15,32 +18,7 @@ namespace music_player_app.Music_App.SoundPlayer
             sf_sound = new Sound();
             sf_sound.Volume = 30;
 
-            UI = new MainUI(sf_sound.Volume);
-        }
-
-        public void DisposeAudioPlayer()
-        {
-            sf_sound.Dispose();
-            sf_buffer.Dispose();
-        }
-
-        #region Sound Buffer Stuff
-        public bool IsAudioLoaded()
-        {
-            if(sf_sound.SoundBuffer != null)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public SoundBuffer GetLoadedAudioBuffer()
-        {
-            if(!IsAudioLoaded())
-            {
-                return null;
-            }
-            return sf_sound.SoundBuffer;
+            UI = new MainUI(sf_sound, sf_sound.Volume);
         }
 
         public void LoadAudio(string file)
@@ -49,9 +27,6 @@ namespace music_player_app.Music_App.SoundPlayer
             sf_sound.SoundBuffer = sf_buffer;
             UI.UpdateSongName(file);/////////////////////////////////UPDATE THIS
         }
-        #endregion Sound Buffer Stuff
-
-
 
         public void Update()
         {
@@ -60,7 +35,5 @@ namespace music_player_app.Music_App.SoundPlayer
                 UI.UpdatePlayingTime(sf_sound);
             }
         }
-
-
     }
 }

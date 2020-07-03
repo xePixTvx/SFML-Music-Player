@@ -1,22 +1,14 @@
 ﻿using System;
 using System.IO;
 using SFML.Window;
-using SFML.Graphics;
 using Core;
-using Core.UI;
-using Core.UI.Controls;
-using music_player_app.Music_App.SoundPlayer;
-using SFML.System;
 using Core.UI.Primitives;
+using music_player_app.Music_App.SoundPlayer;
 
 namespace music_player_app.Music_App
 {
     class Main : App
     {
-        private bool ShowDevCross = false;
-        private Core.Debug.DebugCross DevCross;
-
-
         private SimpleSprite MainBg;
         public static AudioPlayer Audio_Player;
 
@@ -38,15 +30,6 @@ namespace music_player_app.Music_App
             AsManager.Load(AssetManager.AssetType.Font, "Sans_Culottes_By_K-Type.ttf", "sansC");
             #endregion Load Assets
 
-
-            //DEV Align/Positioning Cross Helper Thingy
-            if (ShowDevCross)
-            {
-                DevCross = new Core.Debug.DebugCross();
-            }
-
-
-
             //Main Background
             MainBg = new SimpleSprite("main_bg");
 
@@ -63,8 +46,6 @@ namespace music_player_app.Music_App
 
         protected override void OnAppClosing()
         {
-            //Fixes the OpenAL "AL lib: (EE) alc_cleanup: 1 device not closed" Console Msg ---------- Disposing ends with a "Access violation" error -------- FIX THIS
-            //Audio_Player.DisposeAudioPlayer();
         }
 
 
@@ -74,9 +55,6 @@ namespace music_player_app.Music_App
             if(e.Code == Keyboard.Key.Escape)
             {
                 Exit();
-            }
-            if (e.Code == Keyboard.Key.A)
-            {
             }
         }
 
