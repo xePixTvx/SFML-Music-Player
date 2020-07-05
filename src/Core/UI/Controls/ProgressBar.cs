@@ -74,8 +74,8 @@ namespace Core.UI.Controls
                     Fill_Shape.Size = new Vector2f(fill_size_x, Size.Y);
 
                     //Update Origin
-                    BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.CENTER);
-                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Origin_Horizontal_Alignment.LEFT, Origin_Vertical_Alignment.CENTER);
+                    BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Horizontal_Alignment.CENTER, Vertical_Alignment.CENTER);
+                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Horizontal_Alignment.LEFT, Vertical_Alignment.CENTER);
 
                     //Update Position
                     BG_Shape.Position = Position;
@@ -87,8 +87,8 @@ namespace Core.UI.Controls
                     Fill_Shape.Size = new Vector2f(Size.X, fill_size_y);
 
                     //Update Origin
-                    BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
-                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Origin_Horizontal_Alignment.CENTER, Origin_Vertical_Alignment.BOTTOM);
+                    BG_Shape.Origin = Utils.GetOriginPosition(BG_Shape, Horizontal_Alignment.CENTER, Vertical_Alignment.BOTTOM);
+                    Fill_Shape.Origin = Utils.GetOriginPosition(Fill_Shape, Horizontal_Alignment.CENTER, Vertical_Alignment.BOTTOM);
 
                     //Update Position
                     BG_Shape.Position = Position;

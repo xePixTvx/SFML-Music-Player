@@ -32,55 +32,55 @@ namespace music_player_app.Music_App.SoundPlayer
             Sound = sound;
             CurrentVolume = currentVolume;
 
-            Vector2f Buttons_CenterBottomPos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM);
-            Vector2f Buttons_RightBottomPos = Utils.GetPosition(Position_Horizontal_Alignment.RIGHT, Position_Vertical_Alignment.BOTTOM);
+            Vector2f Buttons_CenterBottomPos = Utils.GetPosition(Horizontal_Alignment.CENTER, Vertical_Alignment.BOTTOM);
+            Vector2f Buttons_RightBottomPos = Utils.GetPosition(Horizontal_Alignment.RIGHT, Vertical_Alignment.BOTTOM);
 
             #region Main UI Elems
             //Play/Pause Button
             PLAY_PAUSE_BUTTON = new SpriteButton("button_play", Action_PlayPause);
-            PLAY_PAUSE_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.LEFT;
-            PLAY_PAUSE_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            PLAY_PAUSE_BUTTON.Origin_H_Align = Horizontal_Alignment.LEFT;
+            PLAY_PAUSE_BUTTON.Origin_V_Align = Vertical_Alignment.BOTTOM;
             PLAY_PAUSE_BUTTON.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 15);
             PLAY_PAUSE_BUTTON.RenderLayer = 0;
 
             //Next Song Button
             NEXT_SONG_BUTTON = new SpriteButton("button_next");
-            NEXT_SONG_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.LEFT;
-            NEXT_SONG_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            NEXT_SONG_BUTTON.Origin_H_Align = Horizontal_Alignment.LEFT;
+            NEXT_SONG_BUTTON.Origin_V_Align = Vertical_Alignment.BOTTOM;
             NEXT_SONG_BUTTON.Position = new Vector2f(Buttons_CenterBottomPos.X + 100, Buttons_CenterBottomPos.Y - 15);
             NEXT_SONG_BUTTON.RenderLayer = 0;
 
             //Stop Button
             STOP_BUTTON = new SpriteButton("button_stop", Action_Stop);
-            STOP_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
-            STOP_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            STOP_BUTTON.Origin_H_Align = Horizontal_Alignment.RIGHT;
+            STOP_BUTTON.Origin_V_Align = Vertical_Alignment.BOTTOM;
             STOP_BUTTON.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 15);
             STOP_BUTTON.RenderLayer = 0;
 
             //Previous Song Button
             PREV_SONG_BUTTON = new SpriteButton("button_previous");
-            PREV_SONG_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
-            PREV_SONG_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            PREV_SONG_BUTTON.Origin_H_Align = Horizontal_Alignment.RIGHT;
+            PREV_SONG_BUTTON.Origin_V_Align = Vertical_Alignment.BOTTOM;
             PREV_SONG_BUTTON.Position = new Vector2f(Buttons_CenterBottomPos.X - 100, Buttons_CenterBottomPos.Y - 15);
             PREV_SONG_BUTTON.RenderLayer = 0;
 
             //Time Line
             TimeLine = new ProgressBar(600, 15, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), ProgressBarStyles.HORIZONTAL);
-            Vector2f timeline_pos = Utils.GetPosition(Position_Horizontal_Alignment.CENTER, Position_Vertical_Alignment.BOTTOM);
+            Vector2f timeline_pos = Utils.GetPosition(Horizontal_Alignment.CENTER, Vertical_Alignment.BOTTOM);
             TimeLine.Position = new Vector2f(timeline_pos.X, timeline_pos.Y - 120);
             TimeLine.RenderLayer = 0;
 
             //Time Text
             TimeText = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "0:00");
-            TimeText.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
-            TimeText.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            TimeText.Origin_H_Align = Horizontal_Alignment.CENTER;
+            TimeText.Origin_V_Align = Vertical_Alignment.BOTTOM;
             TimeText.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 80);
             TimeText.RenderLayer = 0;
 
             //Song Name
             SongName = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), "-");
-            SongName.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
-            SongName.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            SongName.Origin_H_Align = Horizontal_Alignment.CENTER;
+            SongName.Origin_V_Align = Vertical_Alignment.BOTTOM;
             SongName.Position = new Vector2f(Buttons_CenterBottomPos.X, Buttons_CenterBottomPos.Y - 140);
             SongName.RenderLayer = 0;
             #endregion Main UI Elems
@@ -88,35 +88,35 @@ namespace music_player_app.Music_App.SoundPlayer
             #region Volume Menu
             //Volume Menu Button
             VOLUME_MENU_OPEN_BUTTON = new SpriteButton("button_volume",Action_ToggleVolumeMenu);
-            VOLUME_MENU_OPEN_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
-            VOLUME_MENU_OPEN_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_OPEN_BUTTON.Origin_H_Align = Horizontal_Alignment.RIGHT;
+            VOLUME_MENU_OPEN_BUTTON.Origin_V_Align = Vertical_Alignment.BOTTOM;
             VOLUME_MENU_OPEN_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 15);
             VOLUME_MENU_OPEN_BUTTON.RenderLayer = 0;
 
             //Volume Minus Button
             VOLUME_MENU_MINUS_BUTTON = new SpriteButton("minus",Action_DecreaseVolume);
-            VOLUME_MENU_MINUS_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
-            VOLUME_MENU_MINUS_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_MINUS_BUTTON.Origin_H_Align = Horizontal_Alignment.RIGHT;
+            VOLUME_MENU_MINUS_BUTTON.Origin_V_Align = Vertical_Alignment.BOTTOM;
             VOLUME_MENU_MINUS_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 70);
             VOLUME_MENU_MINUS_BUTTON.RenderLayer = 0;
 
             //Volume Plus Button
             VOLUME_MENU_PLUS_BUTTON = new SpriteButton("plus",Action_IncreaseVolume);
-            VOLUME_MENU_PLUS_BUTTON.Origin_H_Align = Origin_Horizontal_Alignment.RIGHT;
-            VOLUME_MENU_PLUS_BUTTON.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_PLUS_BUTTON.Origin_H_Align = Horizontal_Alignment.RIGHT;
+            VOLUME_MENU_PLUS_BUTTON.Origin_V_Align = Vertical_Alignment.BOTTOM;
             VOLUME_MENU_PLUS_BUTTON.Position = new Vector2f(Buttons_RightBottomPos.X - 15, Buttons_RightBottomPos.Y - 320);
             VOLUME_MENU_PLUS_BUTTON.RenderLayer = 0;
 
             //Volume Progressbar
             VOLUME_MENU_PROGRESS = new ProgressBar(15, 200, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), ProgressBarStyles.VERTICAL, CurrentVolume);
-            Vector2f volProgress_pos = Utils.GetPosition(Position_Horizontal_Alignment.RIGHT, Position_Vertical_Alignment.BOTTOM);
+            Vector2f volProgress_pos = Utils.GetPosition(Horizontal_Alignment.RIGHT, Vertical_Alignment.BOTTOM);
             VOLUME_MENU_PROGRESS.Position = new Vector2f(volProgress_pos.X - 39, volProgress_pos.Y - 103);
             VOLUME_MENU_PROGRESS.RenderLayer = 0;
 
             //Volume Progress Text
             VOLUME_MENU_PROGRESS_TEXT = new SimpleText("sansC", Text.Styles.Regular, 20, new Color(255, 255, 255, 255), Convert.ToInt32(CurrentVolume) + "%");
-            VOLUME_MENU_PROGRESS_TEXT.Origin_H_Align = Origin_Horizontal_Alignment.CENTER;
-            VOLUME_MENU_PROGRESS_TEXT.Origin_V_Align = Origin_Vertical_Alignment.BOTTOM;
+            VOLUME_MENU_PROGRESS_TEXT.Origin_H_Align = Horizontal_Alignment.CENTER;
+            VOLUME_MENU_PROGRESS_TEXT.Origin_V_Align = Vertical_Alignment.BOTTOM;
             VOLUME_MENU_PROGRESS_TEXT.Position = new Vector2f(Buttons_RightBottomPos.X - 35, Buttons_RightBottomPos.Y - 307);
             VOLUME_MENU_PROGRESS_TEXT.RenderLayer = 0;
 

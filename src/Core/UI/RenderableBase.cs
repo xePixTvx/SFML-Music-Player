@@ -8,8 +8,8 @@ namespace Core.UI
         private bool _IsActive = true;
         private bool _IsVisible = true;
         private int _RenderLayer = 0;
-        private Origin_Horizontal_Alignment _Origin_H_Align = Origin_Horizontal_Alignment.LEFT;
-        private Origin_Vertical_Alignment _Origin_V_Align = Origin_Vertical_Alignment.TOP;
+        private Horizontal_Alignment _Origin_H_Align = Horizontal_Alignment.LEFT;
+        private Vertical_Alignment _Origin_V_Align = Vertical_Alignment.TOP;
         private Vector2f _Position = new Vector2f(0, 0);
         private float _Rotation = 0;
         private bool _NeedsUpdate = false;
@@ -44,7 +44,7 @@ namespace Core.UI
         #endregion
 
         #region Position
-        public virtual Origin_Horizontal_Alignment Origin_H_Align
+        public virtual Horizontal_Alignment Origin_H_Align
         {
             get { return _Origin_H_Align; }
             set 
@@ -54,7 +54,7 @@ namespace Core.UI
             }
         }
 
-        public virtual Origin_Vertical_Alignment Origin_V_Align
+        public virtual Vertical_Alignment Origin_V_Align
         {
             get { return _Origin_V_Align; }
             set 

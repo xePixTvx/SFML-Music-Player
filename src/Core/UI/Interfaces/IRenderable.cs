@@ -8,8 +8,8 @@ namespace Core.UI.Interfaces
         bool IsVisible { get; set; }
         int RenderLayer { get; set; }
         bool NeedsUpdate { get; set; }
-        Origin_Horizontal_Alignment Origin_H_Align { get; set; }
-        Origin_Vertical_Alignment Origin_V_Align { get; set; }
+        Horizontal_Alignment Origin_H_Align { get; set; }
+        Vertical_Alignment Origin_V_Align { get; set; }
         Vector2f Position { get; set; }
         float Rotation { get; set; }
         void Update();

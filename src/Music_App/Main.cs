@@ -4,6 +4,11 @@ using SFML.Window;
 using Core;
 using Core.UI.Primitives;
 using music_player_app.Music_App.SoundPlayer;
+using Core.UI.Controls;
+
+using SFML.System;
+using SFML.Graphics;
+using Core.UI;
 
 namespace music_player_app.Music_App
 {
@@ -11,6 +16,8 @@ namespace music_player_app.Music_App
     {
         private SimpleSprite MainBg;
         public static AudioPlayer Audio_Player;
+
+        private TextButton tButton;
 
         public Main(string ConfigFileName, string WindowTitle, string ResourceFolderName) : base(ConfigFileName, WindowTitle, ResourceFolderName)
         {
@@ -36,6 +43,13 @@ namespace music_player_app.Music_App
             //Audio Player
             Audio_Player = new AudioPlayer();
             Audio_Player.LoadAudio(Path.Combine(Environment.CurrentDirectory, "data", "test_song.ogg"));//Testing
+
+
+            tButton = new TextButton(400, 50, new Color(255, 0, 0, 255), "default", Text.Styles.Regular, 16, new Color(255, 255, 255, 255), "Test Button YAY!");
+            tButton.Origin_H_Align = Horizontal_Alignment.CENTER;
+            tButton.Origin_V_Align = Vertical_Alignment.CENTER;
+            Vector2f test_pos = Utils.GetPosition(Horizontal_Alignment.CENTER, Vertical_Alignment.CENTER);
+            tButton.Position = test_pos;
         }
 
 

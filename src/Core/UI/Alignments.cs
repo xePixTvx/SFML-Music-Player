@@ -1,12 +1,13 @@
 ﻿namespace Core.UI
 {
-    public enum Position_Horizontal_Alignment
+    public enum Horizontal_Alignment
     {
         LEFT,
         CENTER,
         RIGHT
     }
-    public enum Position_Vertical_Alignment
+
+    public enum Vertical_Alignment
     {
         TOP,
         CENTER,
