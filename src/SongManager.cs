@@ -6,5 +6,9 @@ namespace music_app
 {
     class SongManager
     {
+        public SongManager()
+        {
+
+        }
     }
 }
