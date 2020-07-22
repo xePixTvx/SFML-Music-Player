@@ -5,20 +5,25 @@ using PIX_UI.Graphics.Primitives;
 using PIX_UI.Utilities;
 using SFML.Graphics;
 using SFML.System;
-using System;
 
 namespace music_app.GUI
 {
     class MainGUI
     {
         private VolumeMenu Volume_Menu;
+        private SonglistMenu Songlist_Menu;
+
         public MainGUI()
         {
             Vector2f Position_CENTER_BOTTOM = Position_Utils.GetPositionOnScreen(Alignment.CENTER_BOTTOM);
             Vector2f Position_RIGHT_BOTTOM = Position_Utils.GetPositionOnScreen(Alignment.RIGHT_BOTTOM);
+            Vector2f Position_LEFT_BOTTOM = Position_Utils.GetPositionOnScreen(Alignment.LEFT_BOTTOM);
 
             //Volume Menu
             Volume_Menu = new VolumeMenu(new Vector2f(Position_RIGHT_BOTTOM.X - 10, Position_RIGHT_BOTTOM.Y - 70));
+
+            //Songlist Menu
+            Songlist_Menu = new SonglistMenu(new Vector2f(Position_LEFT_BOTTOM.X + 10, Position_LEFT_BOTTOM.Y - 70));
 
             //Play/Pause Button
             new SpriteButton("Button_Play_Pause", Alignment.CENTER_BOTTOM, Position_CENTER_BOTTOM.X + 25, Position_CENTER_BOTTOM.Y - 10, "button_play");
@@ -40,6 +45,10 @@ namespace music_app.GUI
             new SpriteButton("Button_Volume_Menu_Toggle", Alignment.RIGHT_BOTTOM, Position_RIGHT_BOTTOM.X - 10, Position_RIGHT_BOTTOM.Y - 10, "button_volume", Action_ToggleVolumeMenu);
             App.GetElemByName("Button_Volume_Menu_Toggle").RenderLayer = 1;
 
+            //Toggle Songlist Menu Button
+            new SpriteButton("Button_Songlist_Menu_Toggle", Alignment.LEFT_BOTTOM, Position_LEFT_BOTTOM.X + 10, Position_LEFT_BOTTOM.Y - 10, "button_songlist", Action_ToggleSonglistMenu);
+            App.GetElemByName("Button_Songlist_Menu_Toggle").RenderLayer = 1;
+
             //Song Time
             new SimpleText("Song_Time", Alignment.CENTER_BOTTOM, Position_CENTER_BOTTOM.X, Position_CENTER_BOTTOM.Y - 100, new Color(255, 255, 255, 255), "sansC", 20, Text.Styles.Regular, "0:00");
             App.GetElemByName("Song_Time").RenderLayer = 1;
@@ -60,7 +69,12 @@ namespace music_app.GUI
 
         private void Action_ToggleVolumeMenu()
         {
-            Volume_Menu.Active = (Volume_Menu.Active) ? false : true;
+            Volume_Menu.Active = Volume_Menu.Active ? false : true;
+        }
+
+        private void Action_ToggleSonglistMenu()
+        {
+            Songlist_Menu.Active = Songlist_Menu.Active ? false : true;
         }
 
 

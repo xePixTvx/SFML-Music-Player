@@ -26,7 +26,7 @@ namespace music_app.GUI
             new SpriteButton("Button_Volume_Minus", Alignment.RIGHT_BOTTOM, Main_Pos.X, Main_Pos.Y, "minus");
             App.GetElemByName("Button_Volume_Minus").RenderLayer = 2;
 
-            new ProgressBar("Volume_Bar", 30, 200, Main_Pos.X - 23, Main_Pos.Y - 40, ProgressBarStyles.VERTICAL, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), 50);
+            new ProgressBar("Volume_Bar", 30, 200, Main_Pos.X - 23, Main_Pos.Y - 40, ProgressBarStyles.VERTICAL, new Color(138, 138, 138, 255), new Color(205, 205, 205, 255), 30);
             App.GetElemByName("Volume_Bar").RenderLayer = 2;
 
             new SimpleText("Volume_Progress_Text", Alignment.CENTER_CENTER, Main_Pos.X - 22, Main_Pos.Y - 255, new Color(255, 255, 255, 255), "sansC", 20, Text.Styles.Regular, "30%");
